@@ -1,4 +1,7 @@
 import { FaTachometerAlt, FaLink, FaComments, FaBell } from 'react-icons/fa';
+import ColorRecognition from '../KG/ColorRecognition';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const classIcons = {
   KG: '🧸',
@@ -9,6 +12,14 @@ const classIcons = {
 };
 
 export default function DashboardPage() {
+  const navigate = useNavigate();
+
+ function handleUserClick(className){
+     if(className==='KG'){
+     navigate('/KGActivities');
+     }
+ }
+
   return (
     <div className="flex min-h-screen font-sans">
       {/* Sidebar */}
@@ -50,6 +61,7 @@ export default function DashboardPage() {
                 <div
                   key={className}
                   className="bg-white hover:scale-105 hover:bg-pink-100 transition-all p-8 rounded-2xl shadow-lg border border-pink-200 text-center cursor-pointer group"
+                  onClick={()=>handleUserClick(className)}
                 >
                   <div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">
                     {classIcons[className]}
