@@ -1,0 +1,32 @@
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+
+.animate-float-up {
+  animation-name: floatUp;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+
+/* ====================Number Recognition================================ */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.bounce-number {
+  animation: bounce 1.5s infinite;
+}
+

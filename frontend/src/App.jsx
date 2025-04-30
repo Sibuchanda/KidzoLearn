@@ -4,6 +4,7 @@ import HomePage from "./pages/home/HomePage";
 import Dashboard from "./pages/dashboard/Dashboard";
 import KGActivities from "./pages/KG/KgActivities";
 import ColorRecognition from "./pages/KG/ColorRecognition";
+import NumberRecognition from './pages/KG/NumberRecognition';
 
 function App() {
   const router = createBrowserRouter([
@@ -22,6 +23,10 @@ function App() {
     {
       path: "/ColorRecognition",
       element: <ColorRecognition />,
+    },
+    {
+      path: "/NumberRecognition",
+      element: <NumberRecognition />,
     },
   ]);
 
