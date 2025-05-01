@@ -1,6 +1,12 @@
-import { FaPalette, FaSortNumericUpAlt, FaFont, FaDog, FaArrowLeft } from "react-icons/fa";
+import {
+  FaPalette,
+  FaSortNumericUpAlt,
+  FaFont,
+  FaDog,
+  FaArrowLeft,
+} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import './KgActivities.css'; // Ensure this is correctly imported
+import "./KgActivities.css"; // Ensure this is correctly imported
 
 const activities = [
   {
@@ -29,38 +35,52 @@ const activities = [
   },
 ];
 
-// Generate a random candy color
+// -------- Generaing a random candy color
 function getRandomCandyColor() {
-  const colors = ['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#FFB5E8', '#FCA652', '#A07AFB'];
+  const colors = [
+    "#FF6B6B",
+    "#FFD93D",
+    "#6BCB77",
+    "#4D96FF",
+    "#FFB5E8",
+    "#FCA652",
+    "#A07AFB",
+  ];
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
 export default function KGActivities() {
   const navigate = useNavigate();
+  
+  const handleTest = (category,num)=>{
+      if(category==='Color' && num===1){
+        navigate('/ColorIdentificationTest');
+      }
+  } 
+
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-yellow-50 to-pink-100 p-6 sm:p-10 overflow-hidden">
-      
       {/* Candy stick animation background */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-  {[...Array(30)].map((_, i) => (
-    <div
-      key={i}
-      className="rose-sticker animate-float-up text-xl sm:text-2xl md:text-2xl lg:text-3xl"
-      style={{
-        left: `${Math.random() * 100}%`,
-        animationDelay: `${Math.random() * 10}s`,
-        animationDuration: `${8 + Math.random() * 5}s`,
-        top: '100%', // start from bottom
-        position: 'absolute',
-      }}
-    >
-      🍭
-    </div>
-  ))}
-</div>
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            className="rose-sticker animate-float-up text-xl sm:text-2xl md:text-2xl lg:text-3xl"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 10}s`,
+              animationDuration: `${8 + Math.random() * 5}s`,
+              top: "100%",
+              position: "absolute",
+            }}
+          >
+            🍭
+          </div>
+        ))}
+      </div>
 
-      {/* Back button */}
+      {/* -------- Back button ------  */}
       <button
         onClick={() => navigate(-1)}
         className="absolute top-6 left-6 text-white bg-pink-500 hover:bg-pink-600 p-2 rounded-full shadow-md z-10"
@@ -69,7 +89,7 @@ export default function KGActivities() {
         <FaArrowLeft className="text-2xl" />
       </button>
 
-      {/* Page Title */}
+      {/* -------- Page Title ----- */}
       <h1 className="text-4xl font-bold text-center text-pink-600 mb-10 relative z-10">
         🧸 KG Activities
       </h1>
@@ -86,6 +106,36 @@ export default function KGActivities() {
             <h2 className="mt-4 text-xl font-semibold text-center">
               {activity.name}
             </h2>
+          </div>
+        ))}
+      </div>
+
+      {/* ------ Test Section Heading ------------ */}
+      <h2 className="text-3xl font-bold text-center text-pink-600 mt-16 mb-6">
+        🎓 Test What You have Learned
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8 max-w-6xl mx-auto z-10">
+        {/* ------ For each test category ---------  */}
+        {["Color", "Number", "Alphabet", "Animal"].map((category) => (
+          <div
+            key={category}
+            className="bg-white p-6 rounded-xl shadow-lg border border-pink-200"
+          >
+            <h3 className="text-2xl font-semibold text-pink-600 mb-4 text-center">
+              {category} Tests
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {[1, 2, 3, 4].map((testNum) => (
+                <button
+                  key={testNum}
+                  onClick={() =>handleTest(category,testNum)}
+                  className="bg-pink-100 hover:bg-pink-200 text-pink-700 font-semibold py-2 rounded-lg transition"
+                >
+                  Test {testNum}
+                </button>
+              ))}
+            </div>
           </div>
         ))}
       </div>
