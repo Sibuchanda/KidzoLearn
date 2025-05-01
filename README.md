@@ -4,18 +4,32 @@ Welcome to **KidzoLearn**, an interactive learning app specially designed for **
 
 ---
 
-## 🏠 Step-by-Step Guide to Use KidzoLearn
+## ✨ Key Features of Kidzolearn
+- Class selection(KG to Class 4) dashboard with an interactive interface
+- Diffrent types of learning activities like
+   - Identification
+   - Math
+   - English
+   - Science
+   - General Knowlwdge
+- Audio support for all questions and options for non-readers(like KG students)
+- Activity-based learning with visuals and interactive cards
+- Short tests for each activity to check learning progress
+- Animated and colorful backgrounds designed for young learners
+- Mobile-responsive layout for use on tablets, phones, and desktops
+- Clean, kid-friendly user interface with easy navigation
 
-### 1. Open the Application
+> N:B, Some of our features are not implemented initially, it will be added after future updates.
+
+## 🏠 Step-by-Step Guide to Use KidzoLearn
+## 1. Open the Application
 
 When you open **KidzoLearn** in your browser, you will see the **Homepage** with a **Get Started** button.
 
 - Click the **“Get Started”** button to begin.
 
----
 
-### 2. 🎓 Class Selection
-
+## 2. 🎓 Class Selection
 After clicking **Get Started**, you will reach the **Dashboard**.
 
 - Here you can choose the class:  
@@ -26,9 +40,8 @@ After clicking **Get Started**, you will reach the **Dashboard**.
 
 ---
 
-### 3. 🧸 KG Activities Section
-
-After selecting **KG**, you will enter the **KG Activities** screen with 4 colorful learning cards:
+## 3. 🧸 KG Activities Section
+- After selecting **KG**, you will enter the **KG Activities** screen with 4 colorful learning cards:
 
 1. 🎨 Color Identification  
 2. 🔢 Number Identification  
