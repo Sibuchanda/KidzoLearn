@@ -51,13 +51,10 @@ function getRandomCandyColor() {
 
 export default function KGActivities() {
   const navigate = useNavigate();
-  
-  const handleTest = (category,num)=>{
-      if(category==='Color' && num===1){
-        navigate('/ColorIdentificationTest');
-      }
-  } 
 
+  const handleTest = (num) => {
+      navigate("/KGtest");
+  };
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-yellow-50 to-pink-100 p-6 sm:p-10 overflow-hidden">
@@ -75,7 +72,7 @@ export default function KGActivities() {
               position: "absolute",
             }}
           >
-            🍭
+            🫧
           </div>
         ))}
       </div>
@@ -106,36 +103,6 @@ export default function KGActivities() {
             <h2 className="mt-4 text-xl font-semibold text-center">
               {activity.name}
             </h2>
-          </div>
-        ))}
-      </div>
-
-      {/* ------ Test Section Heading ------------ */}
-      <h2 className="text-3xl font-bold text-center text-pink-600 mt-16 mb-6">
-        🎓 Test What You have Learned
-      </h2>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8 max-w-6xl mx-auto z-10">
-        {/* ------ For each test category ---------  */}
-        {["Color", "Number", "Alphabet", "Animal"].map((category) => (
-          <div
-            key={category}
-            className="bg-white p-6 rounded-xl shadow-lg border border-pink-200"
-          >
-            <h3 className="text-2xl font-semibold text-pink-600 mb-4 text-center">
-              {category} Tests
-            </h3>
-            <div className="grid grid-cols-2 gap-4">
-              {[1, 2, 3, 4].map((testNum) => (
-                <button
-                  key={testNum}
-                  onClick={() =>handleTest(category,testNum)}
-                  className="bg-pink-100 hover:bg-pink-200 text-pink-700 font-semibold py-2 rounded-lg transition"
-                >
-                  Test {testNum}
-                </button>
-              ))}
-            </div>
           </div>
         ))}
       </div>

@@ -8,7 +8,13 @@ import NumberRecognition from './pages/KG/NumberRecognition';
 import AlphabetRecognition from './pages/KG/AlphabetRecognition'
 import AnimalSounds from './pages/KG/AnimalSounds'
 
-import ColorIdentificationTest from './pages/KGTests/ColorIdentificationTest'
+import ClassOneActivities from "./pages/ClassOne/ClassOneActivities";
+import LearnWords from "./pages/ClassOne/LearnWords";
+import SpellTheWord from "./pages/ClassOne/SpellTheWord";
+import BasicMath from "./pages/ClassOne/BasicMath";
+import PrepositionPlay from "./pages/ClassOne/PrepositionPlay";
+
+
 
 function App() {
   const router = createBrowserRouter([
@@ -41,9 +47,26 @@ function App() {
       element: <AnimalSounds />,
     },
     {
-      path: "/ColorIdentificationTest",
-      element: <ColorIdentificationTest />,
+      path: "/LearnWords",
+      element: <LearnWords />,
     },
+    {
+      path: "/ClassOneActivities",
+      element: <ClassOneActivities />,
+    },
+    {
+      path: "/SpellTheWord",
+      element: <SpellTheWord />,
+    },
+    {
+      path: "/BasicMath",
+      element: <BasicMath />,
+    },
+    {
+      path: "/PrepositionPlay",
+      element: <PrepositionPlay />,
+    },
+  
   ]);
 
   return <RouterProvider router={router} />;

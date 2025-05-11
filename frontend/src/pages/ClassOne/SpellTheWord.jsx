@@ -1,0 +1,136 @@
+import React, { useState } from "react";
+
+const wordsData = [
+  { word: "APPLE", emoji: "🍎" },
+  { word: "BALL", emoji: "🏀" },
+  { word: "CAT", emoji: "🐱" },
+  { word: "FISH", emoji: "🐟" },
+  { word: "DUCK", emoji: "🦆" },
+  { word: "CAKE", emoji: "🎂" },
+  { word: "TREE", emoji: "🌳" },
+];
+
+const getMaskedWord = (word, blankIndexes) =>
+  word.split("").map((ch, i) => (blankIndexes.includes(i) ? "" : ch));
+
+const SpellTheWord = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const correctWord = wordsData[currentIndex].word;
+
+  const generateBlankIndexes = (word) => {
+    const indexes = [];
+    while (indexes.length < 2) {
+      const rand = Math.floor(Math.random() * word.length);
+      if (!indexes.includes(rand)) indexes.push(rand);
+    }
+    return indexes;
+  };
+
+  const [blankIndexes, setBlankIndexes] = useState(generateBlankIndexes(correctWord));
+  const [inputLetters, setInputLetters] = useState(getMaskedWord(correctWord, blankIndexes));
+  const [showHint, setShowHint] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isTryAgain, setIsTryAgain] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
+
+  const handleInputChange = (val, index) => {
+    const updated = [...inputLetters];
+    updated[index] = val.toUpperCase().slice(0, 1);
+    setInputLetters(updated);
+  };
+
+  const handleSubmit = () => {
+    if (isTryAgain) {
+      const resetInputs = inputLetters.map((char, i) =>
+        blankIndexes.includes(i) ? "" : correctWord[i]
+      );
+      setInputLetters(resetInputs);
+      setMessage("");
+      setIsTryAgain(false);
+      return;
+    }
+
+    if (inputLetters.includes("")) {
+      setMessage("⚠️ Please fill all the characters.");
+      return;
+    }
+
+    if (inputLetters.join("") === correctWord) {
+      setMessage("🎉 Correct! Click NEXT to continue.");
+      setIsCorrect(true);
+    } else {
+      setMessage("❌ Wrong answer. Try again!");
+      setIsTryAgain(true);
+    }
+  };
+
+  const handleNext = () => {
+    const next = (currentIndex + 1) % wordsData.length;
+    const nextWord = wordsData[next].word;
+    const nextBlanks = generateBlankIndexes(nextWord);
+    setCurrentIndex(next);
+    setBlankIndexes(nextBlanks);
+    setInputLetters(getMaskedWord(nextWord, nextBlanks));
+    setShowHint(false);
+    setMessage("");
+    setIsTryAgain(false);
+    setIsCorrect(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-tr from-purple-200 to-blue-100 p-8 flex flex-col items-center justify-center text-center font-sans">
+      <h1 className="text-4xl font-extrabold text-blue-800 mb-6 drop-shadow-md">🎯 Spell the Word</h1>
+
+      <div className="text-9xl mb-8 drop-shadow-lg">{wordsData[currentIndex].emoji}</div>
+
+      <div className="flex justify-center gap-3 mb-6">
+        {inputLetters.map((char, index) => (
+          <input
+            key={index}
+            type="text"
+            value={char}
+            onChange={(e) => handleInputChange(e.target.value, index)}
+            className={`w-16 h-16 text-3xl text-center border-4 rounded-xl shadow-md focus:outline-none ${
+              blankIndexes.includes(index) ? "bg-white" : "bg-gray-300"
+            }`}
+            disabled={!blankIndexes.includes(index)}
+          />
+        ))}
+      </div>
+
+      <div className="flex flex-wrap justify-center gap-4 mb-4">
+        <button
+          onClick={handleSubmit}
+          className={`${
+            isTryAgain ? "bg-red-500 hover:bg-red-600" : "bg-green-600 hover:bg-green-700"
+          } text-white px-6 py-3 rounded-xl text-lg font-bold shadow-md transition`}
+        >
+          {isTryAgain ? "Try Again" : "Submit"}
+        </button>
+
+        {isCorrect && (
+          <button
+            onClick={handleNext}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-xl text-lg font-bold shadow-md transition"
+          >
+            NEXT
+          </button>
+        )}
+
+        <button
+          onClick={() => setShowHint(true)}
+          className="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-3 rounded-xl text-lg font-bold shadow-md transition"
+        >
+          Hint
+        </button>
+      </div>
+
+      {message && <p className="mt-3 text-xl font-semibold text-purple-700">{message}</p>}
+      {showHint && (
+        <p className="mt-2 text-lg text-pink-600 font-semibold">🔍 Hint: {correctWord}</p>
+      )}
+    </div>
+  );
+};
+
+export default SpellTheWord;

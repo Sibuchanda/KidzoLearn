@@ -17,6 +17,8 @@ export default function DashboardPage() {
  function handleUserClick(className){
      if(className==='KG'){
      navigate('/KGActivities');
+     }else if(className=='Class 1'){
+      navigate('/ClassOneActivities')
      }
  }
 
