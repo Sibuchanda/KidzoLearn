@@ -4,17 +4,12 @@ import {
   FaCalculator,
   FaPaw,
   FaArrowLeft,
+  FaArrowsAlt
 } from "react-icons/fa";  // Only import icons that you are actually using
 
 import { useNavigate } from "react-router-dom";
 
 const activities = [
-  {
-    name: "A–Z Vocabulary Words",
-    icon: <FaFont className="text-4xl text-white" />,
-    bgColor: "bg-blue-400",
-    route: "/LearnWords",
-  },
   {
     name: "Match the Word Game",
     icon: <FaKeyboard className="text-4xl text-white" />,
@@ -27,12 +22,18 @@ const activities = [
     bgColor: "bg-green-400",
     route: "/BasicMath",
   },
-  {
+      {
+    name: "A–Z Vocabulary Words",
+    icon: <FaFont className="text-4xl text-white" />,
+    bgColor: "bg-blue-400",
+    route: "/LearnWords",
+  },
+{
     name: "Play with Prepositions",
-    icon: <FaPaw className="text-4xl text-white" />,
+    icon: <FaArrowsAlt className="text-4xl text-white" />, // Changed icon to FaArrowsAlt
     bgColor: "bg-yellow-400",
     route: "/PrepositionPlay",
-  },
+  }
 ];
 
 export default function ClassOneActivities() {
