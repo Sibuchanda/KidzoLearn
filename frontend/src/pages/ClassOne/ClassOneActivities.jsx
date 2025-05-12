@@ -2,7 +2,7 @@ import {
   FaFont,
   FaKeyboard,
   FaCalculator,
-  FaPaw,
+  FaMapMarkedAlt,
   FaArrowLeft,
   FaArrowsAlt
 } from "react-icons/fa";  // Only import icons that you are actually using
@@ -33,7 +33,13 @@ const activities = [
     icon: <FaArrowsAlt className="text-4xl text-white" />, // Changed icon to FaArrowsAlt
     bgColor: "bg-yellow-400",
     route: "/PrepositionPlay",
-  }
+  },
+{
+  name: "States of India",
+  icon: <FaMapMarkedAlt className="text-4xl text-white" />, // 📍 Better map-related icon
+  bgColor: "bg-sky-400",
+  route: "/StatesOfIndia",
+}
 ];
 
 export default function ClassOneActivities() {

@@ -1,87 +1,131 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import {
-  FaMagic,
-  FaSmile,
-  FaBookOpen,
-  FaVolumeUp,
-  FaChalkboardTeacher,
-  FaCubes,
-} from "react-icons/fa";
+import { FaGamepad, FaBookOpen, FaHeadphones, FaSmile } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 
-const features = [
-  {
-    icon: <FaCubes className="text-5xl text-pink-500 mb-4" />,
-    title: "Diverse Learning Activities",
-    description:
-      "From alphabet and color recognition to simple math and science, kids enjoy interactive content for every subject.",
-  },
-  {
-    icon: <FaVolumeUp className="text-5xl text-yellow-500 mb-4" />,
-    title: "Audio Support for Non-Readers",
-    description:
-      "Every learning activity and test question has an audio option, so even early learners can follow along easily.",
-  },
-  {
-    icon: <FaChalkboardTeacher className="text-5xl text-green-500 mb-4" />,
-    title: "Interactive Visual Cards",
-    description:
-      "Beautiful illustrations and tappable elements make learning more engaging and help children retain better.",
-  },
-  {
-    icon: <FaSmile className="text-5xl text-blue-500 mb-4" />,
-    title: "Short Learning Tests",
-    description:
-      "After exploring each activity, children can take simple tests to check what they’ve learned and feel accomplished.",
-  },
-  {
-    icon: <FaBookOpen className="text-5xl text-purple-500 mb-4" />,
-    title: "Class-Based Learning Dashboard",
-    description:
-      "Parents or kids can select a class (KG to Class 4) to explore age-appropriate content with an intuitive interface.",
-  },
-];
 
+// ========== Home page section ============
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-pink-50 via-yellow-50 to-blue-50 p-6 flex flex-col items-center">
+    <main
+      className="min-h-screen bg-cover bg-center p-6 flex flex-col items-center"
+      style={{ backgroundImage: "url('/images/bg2.png')" }}
+    >
+     {/* Heading  */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-center mt-16 max-w-3xl"
+        className="text-center mt-24 mb-10 px-4"
       >
-        <h1 className="text-5xl font-bold text-pink-600 mb-4">
-          Welcome to <span className="text-blue-500">KiddoLearn!</span>
+        <h1 className="text-5xl font-bold text-pink-600 mb-6 font-[Comic Sans MS,cursive]">
+          Welcome to <span className="text-blue-500">KiddoSchool</span>
         </h1>
-        <p className="text-lg text-gray-700 mb-10">
-          A joyful, interactive learning platform for KG to Class 4 students —
-          filled with games, activities, sounds, and animations!
+        <p className="text-lg text-gray-700 font-medium max-w-2xl mx-auto">
+          A magical world of fun learning for little explorers!
         </p>
-
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className="mb-16"
+      >
         <Link to="/dashboard">
-          <button className="bg-pink-500 text-white px-6 py-3 rounded-full shadow-md hover:bg-pink-600 transition">
+          <button className="bg-blue-700 text-white px-6 py-3 rounded-sm shadow-lg hover:bg-blue-500 transition font-bold text-lg hover:cursor-pointer">
             Get Started
           </button>
         </Link>
       </motion.div>
 
-      {/* Features Section */}
-      <section className="w-full max-w-5xl mt-16 grid grid-cols-1 md:grid-cols-2 gap-10">
-        {features.map((feature, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 * index }}
-            className="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition"
-          >
-            {feature.icon}
-            <h3 className="text-xl font-bold text-pink-600 mb-2">{feature.title}</h3>
-            <p className="text-gray-600 text-sm">{feature.description}</p>
-          </motion.div>
-        ))}
+       {/* === Features Section ==== */}
+      <section className="max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-8 text-center mb-20">
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          className="bg-white rounded-xl p-6 shadow-lg"
+        >
+          <FaGamepad size={40} className="text-purple-500 mx-auto mb-2" />
+          <h3 className="font-bold text-pink-600">Fun Games</h3>
+          <p className="text-sm text-gray-600">
+            Play & learn with fun activities
+          </p>
+        </motion.div>
+
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          className="bg-white rounded-xl p-6 shadow-lg"
+        >
+          <FaBookOpen size={40} className="text-blue-500 mx-auto mb-2" />
+          <h3 className="font-bold text-blue-600">Seperate class</h3>
+          <p className="text-sm text-gray-600">
+            we have interactive lessions for class KG and class One
+          </p>
+        </motion.div>
+
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          className="bg-white rounded-xl p-6 shadow-lg"
+        >
+          <FaHeadphones size={40} className="text-green-500 mx-auto mb-2" />
+          <h3 className="font-bold text-green-600">Audio Features</h3>
+          <p className="text-sm text-gray-600">
+            Learn through audio for non-readers
+          </p>
+        </motion.div>
+
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          className="bg-white rounded-xl p-6 shadow-lg"
+        >
+          <FaSmile size={40} className="text-yellow-500 mx-auto mb-2" />
+          <h3 className="font-bold text-yellow-600">All topic</h3>
+          <p className="text-sm text-gray-600">Here you can learn English, Math, geography, Science etc</p>
+        </motion.div>
       </section>
+
+      {/* === Footer Section ==== */}
+      <footer className="w-full bg-white/20 text-gray-800 py-6 mt-10 backdrop-blur-md shadow-md">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+          <div className="text-center md:text-left mb-4 md:mb-0">
+            <h2 className="text-xl font-bold">KiddoSchool</h2>
+            <p className="text-sm mt-1">
+              © {new Date().getFullYear()} KiddoSchool. All rights reserved.
+            </p>
+          </div>
+
+          <div className="flex gap-6 text-2xl mb-4 md:mb-0">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              className="hover:text-blue-600"
+            >
+              <FaFacebook />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              className="hover:text-pink-600"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              className="hover:text-red-600"
+            >
+              <FaYoutube />
+            </a>
+          </div>
+          <div className="text-sm text-center md:text-right">
+            <a href="#" className="hover:underline block">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:underline">
+              Terms of Services
+            </a>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }

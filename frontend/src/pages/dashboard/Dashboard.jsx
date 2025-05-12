@@ -6,9 +6,6 @@ import { Link, useNavigate } from 'react-router-dom';
 const classIcons = {
   KG: '🧸',
   'Class 1': '✏️',
-  'Class 2': '🎨',
-  'Class 3': '📚',
-  'Class 4': '🌍',
 };
 
 export default function DashboardPage() {
@@ -59,7 +56,7 @@ export default function DashboardPage() {
           <div>
             <h2 className="text-2xl font-semibold text-pink-500 mb-4">📚 Select Your Class</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {["KG", "Class 1", "Class 2", "Class 3", "Class 4"].map((className) => (
+              {["KG", "Class 1"].map((className) => (
                 <div
                   key={className}
                   className="bg-white hover:scale-105 hover:bg-pink-100 transition-all p-8 rounded-2xl shadow-lg border border-pink-200 text-center cursor-pointer group"

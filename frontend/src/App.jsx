@@ -13,6 +13,7 @@ import LearnWords from "./pages/ClassOne/LearnWords";
 import SpellTheWord from "./pages/ClassOne/SpellTheWord";
 import BasicMath from "./pages/ClassOne/BasicMath";
 import PrepositionPlay from "./pages/ClassOne/PrepositionPlay";
+import StatesOfIndia from "./pages/ClassOne/StatesOfIndia";
 
 
 
@@ -65,6 +66,10 @@ function App() {
     {
       path: "/PrepositionPlay",
       element: <PrepositionPlay />,
+    },
+    {
+      path: "/StatesOfIndia",
+      element: <StatesOfIndia />,
     },
   
   ]);
