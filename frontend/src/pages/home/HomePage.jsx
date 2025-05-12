@@ -19,7 +19,7 @@ export default function HomePage() {
         className="text-center mt-24 mb-10 px-4"
       >
         <h1 className="text-5xl font-bold text-pink-600 mb-6 font-[Comic Sans MS,cursive]">
-          Welcome to <span className="text-blue-500">KiddoSchool</span>
+          Welcome to <span className="text-blue-500">KidzoSchool</span>
         </h1>
         <p className="text-lg text-gray-700 font-medium max-w-2xl mx-auto">
           A magical world of fun learning for little explorers!
@@ -89,7 +89,7 @@ export default function HomePage() {
           <div className="text-center md:text-left mb-4 md:mb-0">
             <h2 className="text-xl font-bold">KiddoSchool</h2>
             <p className="text-sm mt-1">
-              © {new Date().getFullYear()} KiddoSchool. All rights reserved.
+              © {new Date().getFullYear()} KidzoSchool. All rights reserved.
             </p>
           </div>
 

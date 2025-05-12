@@ -15,6 +15,8 @@ import BasicMath from "./pages/ClassOne/BasicMath";
 import PrepositionPlay from "./pages/ClassOne/PrepositionPlay";
 import StatesOfIndia from "./pages/ClassOne/StatesOfIndia";
 
+import ContactUs from "./pages/dashboard/ContactUs/ContactUs";
+
 
 
 function App() {
@@ -70,6 +72,10 @@ function App() {
     {
       path: "/StatesOfIndia",
       element: <StatesOfIndia />,
+    },
+    {
+      path: "/ContactUs",
+      element: <ContactUs />,
     },
   
   ]);
