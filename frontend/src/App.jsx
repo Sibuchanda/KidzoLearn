@@ -17,6 +17,9 @@ import StatesOfIndia from "./pages/ClassOne/StatesOfIndia";
 
 import ContactUs from "./pages/dashboard/ContactUs/ContactUs";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 
 function App() {
@@ -80,7 +83,12 @@ function App() {
   
   ]);
 
-  return <RouterProvider router={router} />;
+  return(
+  <>
+  <ToastContainer position="top-right" />
+  <RouterProvider router={router} />;
+  </>
+  ) 
 }
 
 export default App;

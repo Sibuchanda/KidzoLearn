@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const questions = [
   { question: "2 + 3 =", answer: "5", hintExplanation: "2 + 3 = 5" },
@@ -14,6 +17,7 @@ const questions = [
 ];
 
 export default function BasicMath() {
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [message, setMessage] = useState("");
@@ -33,15 +37,15 @@ export default function BasicMath() {
     }
 
     if (userAnswer.trim() === "") {
-      setMessage("⚠️ Please enter your answer.");
+      toast.warn("Please enter your answer!");
       return;
     }
 
     if (userAnswer.trim() === currentQ.answer) {
-      setMessage("🎉 Correct! Great job!");
+      toast.success("Correct answer. Click Next button to move next")
       setShowNext(true);
     } else {
-      setMessage("❌ Wrong answer. Try again!");
+      toast.error("Wrong answer.Try again!");
       setIsTryAgain(true);
     }
   };
@@ -58,6 +62,16 @@ export default function BasicMath() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-yellow-100 p-6 flex flex-col items-center justify-center text-center">
+
+       {/* Back Button  */}
+            <button
+              onClick={() => navigate(-1)}
+              className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-3 rounded-md shadow-md z-10 cursor-pointer"
+              aria-label="Go back"
+            >
+              <FaArrowLeft className="text-2xl" />
+            </button>
+
       <h1 className="text-4xl md:text-5xl font-bold text-purple-700 mb-6">
         🔢 Basic Math Practice
       </h1>

@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
+
 
 const wordsData = [
   { word: "APPLE", emoji: "🍎" },
@@ -14,6 +18,7 @@ const getMaskedWord = (word, blankIndexes) =>
   word.split("").map((ch, i) => (blankIndexes.includes(i) ? "" : ch));
 
 const SpellTheWord = () => {
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const correctWord = wordsData[currentIndex].word;
 
@@ -51,15 +56,15 @@ const SpellTheWord = () => {
     }
 
     if (inputLetters.includes("")) {
-      setMessage("⚠️ Please fill all the characters.");
+      toast.warn("Please fill all the characters.");
       return;
     }
 
     if (inputLetters.join("") === correctWord) {
-      setMessage("🎉 Correct! Click NEXT to continue.");
+      toast.success("Correct! Click NEXT to continue.");
       setIsCorrect(true);
     } else {
-      setMessage("❌ Wrong answer. Try again!");
+      toast.error("Wrong answer. Try again!");
       setIsTryAgain(true);
     }
   };
@@ -79,7 +84,16 @@ const SpellTheWord = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-tr from-purple-200 to-blue-100 p-8 flex flex-col items-center justify-center text-center font-sans">
-      <h1 className="text-4xl font-extrabold text-blue-800 mb-6 drop-shadow-md">🎯 Spell the Word</h1>
+
+       {/* Back Button  */}
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-3 rounded-md shadow-md z-10 cursor-pointer"
+        aria-label="Go back"
+      >
+        <FaArrowLeft className="text-2xl" />
+      </button>
+      <h1 className="text-4xl font-extrabold text-blue-800 mb-6 drop-shadow-md">Spell the Word</h1>
 
       <div className="text-9xl mb-8 drop-shadow-lg">{wordsData[currentIndex].emoji}</div>
 
@@ -127,7 +141,7 @@ const SpellTheWord = () => {
 
       {message && <p className="mt-3 text-xl font-semibold text-purple-700">{message}</p>}
       {showHint && (
-        <p className="mt-2 text-lg text-pink-600 font-semibold">🔍 Hint: {correctWord}</p>
+        <p className="mt-2 text-lg text-pink-600 font-semibold"> Hint: {correctWord}</p>
       )}
     </div>
   );

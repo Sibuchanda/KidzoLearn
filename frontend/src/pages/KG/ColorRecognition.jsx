@@ -31,15 +31,15 @@ export default function ColorRecognition() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-pink-100 p-6 sm:p-10">
       {/*----  Back Button -------*/}
-      <button 
-        onClick={() => navigate(-1)} 
-        className="absolute top-6 left-6 text-white bg-pink-500 hover:bg-pink-600 p-2 rounded-full shadow-md transition"
+           <button
+        onClick={() => navigate(-1)}
+        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-3 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <FaArrowLeft className="text-2xl" />
+        <FaArrowLeft className="text-2xl"/>
       </button>
 
-      <h1 className="text-4xl sm:text-5xl font-bold text-center text-pink-600 mb-10">🌈 Tap a Color to Hear It!</h1>
+      <h1 className="text-4xl sm:text-5xl font-bold text-center text-pink-600 mb-10">Tap a Color to Hear It!</h1>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
         {colors.map((color) => (

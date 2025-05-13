@@ -6,7 +6,7 @@ import {
   FaArrowLeft,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import "./KgActivities.css"; // Ensure this is correctly imported
+import "./KgActivities.css";
 
 const activities = [
   {
@@ -35,7 +35,7 @@ const activities = [
   },
 ];
 
-// -------- Generaing a random candy color
+// -------- Generaing a random candy color --------
 function getRandomCandyColor() {
   const colors = [
     "#FF6B6B",
@@ -49,16 +49,16 @@ function getRandomCandyColor() {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
+
 export default function KGActivities() {
   const navigate = useNavigate();
-
   const handleTest = (num) => {
       navigate("/KGtest");
   };
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-yellow-50 to-pink-100 p-6 sm:p-10 overflow-hidden">
-      {/* Candy stick animation background */}
+      {/* ===== Candy stick animation background =======*/}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {[...Array(30)].map((_, i) => (
           <div
@@ -80,15 +80,15 @@ export default function KGActivities() {
       {/* -------- Back button ------  */}
       <button
         onClick={() => navigate(-1)}
-        className="absolute top-6 left-6 text-white bg-pink-500 hover:bg-pink-600 p-2 rounded-full shadow-md z-10"
+        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-3 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <FaArrowLeft className="text-2xl" />
+        <FaArrowLeft className="text-2xl"/>
       </button>
 
       {/* -------- Page Title ----- */}
       <h1 className="text-4xl font-bold text-center text-pink-600 mb-10 relative z-10">
-        🧸 KG Activities
+        KG Activities
       </h1>
 
       {/* Activity Cards */}

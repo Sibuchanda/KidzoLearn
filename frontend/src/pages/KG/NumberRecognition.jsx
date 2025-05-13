@@ -21,16 +21,16 @@ export default function NumberBounce() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-200 p-6 relative overflow-hidden">
       {/* Back Button */}
-      <button
+          <button
         onClick={() => navigate(-1)}
-        className="absolute top-4 left-4 z-10 text-white bg-blue-500 hover:bg-blue-600 p-2 rounded-full shadow-md transition"
+        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-3 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <FaArrowLeft className="text-xl" />
+        <FaArrowLeft className="text-2xl"/>
       </button>
 
       <h1 className="text-4xl sm:text-5xl font-bold text-center text-blue-700 mb-10">
-        🔢 Tap a Number to Hear It!
+        Tap a Number to Hear It!
       </h1>
 
       <div className="grid grid-cols-3 sm:grid-cols-5 gap-x-6 gap-y-12 max-w-5xl mx-auto mt-20">

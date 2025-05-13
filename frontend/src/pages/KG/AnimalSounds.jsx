@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { FaVolumeUp } from "react-icons/fa";
+import { FaVolumeUp, FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const animals = [
   { name: "Cat", image: "cat.png", sound: "cat.wav" },
@@ -16,6 +17,7 @@ const animals = [
 
 const AnimalSoundFlashcards = () => {
   const [audio] = useState(new Audio());
+  const navigate=useNavigate();
 
   const playSound = (soundFile) => {
     audio.src = `/animalSound/${soundFile}`;
@@ -24,8 +26,17 @@ const AnimalSoundFlashcards = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 to-pink-100 p-6">
+      {/* Back Button  */}
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-3 rounded-md shadow-md z-10 cursor-pointer"
+        aria-label="Go back"
+      >
+        <FaArrowLeft className="text-2xl" />
+      </button>
+
       <h1 className="text-4xl text-center font-bold text-pink-600 mb-10">
-        🐾 Tap an Animal to Hear Its Sound!
+        Tap an Animal to Hear Its Sound!
       </h1>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
@@ -40,7 +51,9 @@ const AnimalSoundFlashcards = () => {
               alt={animal.name}
               className="w-full h-70 object-contain mb-3 drop-shadow-lg bg-white rounded-xl p-2"
             />
-            <div className="text-lg font-semibold text-pink-600">{animal.name}</div>
+            <div className="text-lg font-semibold text-pink-600">
+              {animal.name}
+            </div>
             <FaVolumeUp className="text-pink-500 text-xl mt-1 mx-auto" />
           </div>
         ))}

@@ -47,15 +47,18 @@ export default function AlphabetObjectGame() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 to-pink-100 p-6 relative">
-      <button
+
+      {/* Back Button  */}
+       <button
         onClick={() => navigate(-1)}
-        className="absolute top-4 left-4 z-10 text-white bg-pink-500 hover:bg-pink-600 p-2 rounded-full shadow"
+        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-3 rounded-md shadow-md z-10 cursor-pointer"
+        aria-label="Go back"
       >
-        <FaArrowLeft />
+        <FaArrowLeft className="text-2xl"/>
       </button>
 
       <h1 className="text-4xl text-center font-bold text-pink-600 mb-10">
-        🔤 Tap a Letter to Learn!
+        Tap a Letter to Learn!
       </h1>
 
       <div className="grid grid-cols-4 sm:grid-cols-6 gap-4 max-w-4xl mx-auto">

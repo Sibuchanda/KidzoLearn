@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
+import { useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const stateColors = {
   Maharashtra: "#f9c74f",
@@ -13,10 +15,10 @@ const stateColors = {
   Kerala: "#ff6b6b",
   Bihar: "#6a4c93",
   Odisha: "#ffb703",
-  // Add more based on available `d.properties.name`
 };
 
 const StatesOfIndia = () => {
+  const navigate = useNavigate();
   const svgRef = useRef();
 
   useEffect(() => {
@@ -82,6 +84,15 @@ const StatesOfIndia = () => {
 
   return (
     <div className="flex justify-center items-center p-4 relative">
+
+       {/* Back Button  */}
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-3 rounded-md shadow-md z-10 cursor-pointer"
+        aria-label="Go back"
+      >
+        <FaArrowLeft className="text-2xl" />
+      </button>
       <svg ref={svgRef}></svg>
       <div id="tooltip"></div>
     </div>

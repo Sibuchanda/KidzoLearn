@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FaGamepad, FaBookOpen, FaHeadphones, FaSmile } from "react-icons/fa";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 
 
@@ -39,12 +38,12 @@ export default function HomePage() {
       </motion.div>
 
        {/* === Features Section ==== */}
-      <section className="max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-8 text-center mb-20">
+      <section className="max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-8 text-center mb-20 mt-20">
         <motion.div
           whileHover={{ scale: 1.1 }}
           className="bg-white rounded-xl p-6 shadow-lg"
         >
-          <FaGamepad size={40} className="text-purple-500 mx-auto mb-2" />
+          <img src={`/homepageImg/fun.png`} size={30} className="text-purple-500 mb-2 mx-auto" />
           <h3 className="font-bold text-pink-600">Fun Games</h3>
           <p className="text-sm text-gray-600">
             Play & learn with fun activities
@@ -55,7 +54,7 @@ export default function HomePage() {
           whileHover={{ scale: 1.1 }}
           className="bg-white rounded-xl p-6 shadow-lg"
         >
-          <FaBookOpen size={40} className="text-blue-500 mx-auto mb-2" />
+          <img src={`/homepageImg/class.png`} size={30} className="text-purple-500 mb-2 mx-auto" />
           <h3 className="font-bold text-blue-600">Seperate class</h3>
           <p className="text-sm text-gray-600">
             we have interactive lessions for class KG and class One
@@ -66,7 +65,7 @@ export default function HomePage() {
           whileHover={{ scale: 1.1 }}
           className="bg-white rounded-xl p-6 shadow-lg"
         >
-          <FaHeadphones size={40} className="text-green-500 mx-auto mb-2" />
+          <img src={`/homepageImg/audio.png`} size={30} className="text-purple-500 mb-2 mx-auto" />
           <h3 className="font-bold text-green-600">Audio Features</h3>
           <p className="text-sm text-gray-600">
             Learn through audio for non-readers
@@ -77,15 +76,15 @@ export default function HomePage() {
           whileHover={{ scale: 1.1 }}
           className="bg-white rounded-xl p-6 shadow-lg"
         >
-          <FaSmile size={40} className="text-yellow-500 mx-auto mb-2" />
+          <img src={`/homepageImg/alltopic.png`} size={30} className="text-purple-500 mb-2 mx-auto" />
           <h3 className="font-bold text-yellow-600">All topic</h3>
           <p className="text-sm text-gray-600">Here you can learn English, Math, geography, Science etc</p>
         </motion.div>
       </section>
 
       {/* === Footer Section ==== */}
-      <footer className="w-full bg-white/20 text-gray-800 py-6 mt-10 backdrop-blur-md shadow-md">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+      <footer className="w-full text-gray-800 py-6 mt-10 backdrop-blur-md">
+        <div className="w-full px-4 flex flex-col md:flex-row justify-between items-center">
           <div className="text-center md:text-left mb-4 md:mb-0">
             <h2 className="text-xl font-bold">KiddoSchool</h2>
             <p className="text-sm mt-1">
