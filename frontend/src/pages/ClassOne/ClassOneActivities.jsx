@@ -77,7 +77,7 @@ export default function ClassOneActivities() {
 
       {/* Page Title */}
       <h1 className="text-4xl font-bold text-center text-blue-700 mb-10 relative z-10">
-        📘 Class 1 Learning Zone
+        Class 1 Learning Zone
       </h1>
 
       {/* Activity Cards */}

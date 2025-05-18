@@ -48,20 +48,20 @@ export default function AlphabetObjectGame() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 to-pink-100 p-6 relative">
 
-      {/* Back Button  */}
-       <button
+       {/* Back to KG Activities */}
+      <button
         onClick={() => navigate(-1)}
-        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-3 rounded-md shadow-md z-10 cursor-pointer"
+        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <FaArrowLeft className="text-2xl"/>
+        <FaArrowLeft className="text-2xl" />
       </button>
 
       <h1 className="text-4xl text-center font-bold text-pink-600 mb-10">
         Tap a Letter to Learn!
       </h1>
 
-      <div className="grid grid-cols-4 sm:grid-cols-6 gap-4 max-w-4xl mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {Object.entries(alphabetData).map(([letter, data]) => (
           <div
             key={letter}
@@ -69,7 +69,8 @@ export default function AlphabetObjectGame() {
               setSelected({ letter, ...data });
               speak(letter, data.word);
             }}
-            className="cursor-pointer bg-white text-pink-600 font-extrabold text-5xl rounded-lg shadow-md hover:scale-105 transition transform p-4 text-center"
+            className="cursor-pointer bg-blue-500 text-pink-600 font-extrabold text-8xl rounded-2xl shadow-lg hover:scale-105 transition transform py-20 text-center hover:bg-blue-800"
+
           >
             {letter}
           </div>
@@ -82,10 +83,10 @@ export default function AlphabetObjectGame() {
           className="fixed inset-0 bg-black/50 flex items-center justify-center z-20"
           onClick={() => setSelected(null)}
         >
-          <div className="bg-white p-6 rounded-xl shadow-xl text-center max-w-sm">
-            <div className="text-8xl">{selected.emoji}</div>
-            <h2 className="text-3xl font-bold mt-4 text-pink-700">{selected.letter}</h2>
-            <p className="text-xl mt-2">{selected.word}</p>
+          <div className="bg-white p-25 rounded-xl shadow-xl text-center max-w-sm">
+            <div className="text-9xl">{selected.emoji}</div>
+            <h2 className="text-6xl font-bold mt-4 text-pink-700">{selected.letter}</h2>
+            <p className="text-2xl mt-2">{selected.word}</p>
             <button
               onClick={(e) => {
                 e.stopPropagation();

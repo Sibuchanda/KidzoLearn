@@ -61,7 +61,7 @@ export default function BasicMath() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-yellow-100 p-6 flex flex-col items-center justify-center text-center">
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-yellow-100 p-6 flex flex-col items-center justify-center overflow-y-hidden text-center">
 
        {/* Back Button  */}
             <button
