@@ -54,7 +54,7 @@ export default function NumberBounce() {
 
         <div
           onClick={() => speakNumber(currentNumber)}
-          className="cursor-pointer text-[8rem] sm:text-[8rem] font-extrabold text-center text-white drop-shadow-lg hover:scale-105 transition-transform duration-300 rounded-xl px-20 bg-blue-500 shadow-xl"
+          className="cursor-pointer text-[8rem] sm:text-[12rem] font-extrabold text-center text-white drop-shadow-lg hover:scale-105 transition-transform duration-300 rounded-xl px-40 bg-blue-500 shadow-xl"
         >
           {currentNumber}
           <span className="ml-4 text-2xl align-middle">

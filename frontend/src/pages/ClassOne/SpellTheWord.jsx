@@ -88,12 +88,12 @@ const SpellTheWord = () => {
        {/* Back Button  */}
       <button
         onClick={() => navigate(-1)}
-        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-3 rounded-md shadow-md z-10 cursor-pointer"
+        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
         <FaArrowLeft className="text-2xl" />
       </button>
-      <h1 className="text-4xl font-extrabold text-blue-800 mb-6 drop-shadow-md">Spell the Word</h1>
+      <h1 className="text-4xl font-extrabold text-blue-800 mb-16 drop-shadow-md">Spell the Word</h1>
 
       <div className="text-9xl mb-8 drop-shadow-lg">{wordsData[currentIndex].emoji}</div>
 
@@ -104,7 +104,7 @@ const SpellTheWord = () => {
             type="text"
             value={char}
             onChange={(e) => handleInputChange(e.target.value, index)}
-            className={`w-16 h-16 text-3xl text-center border-4 rounded-xl shadow-md focus:outline-none ${
+            className={`w-24 h-24 text-4xl text-center border-4 rounded-xl shadow-md focus:outline-none ${
               blankIndexes.includes(index) ? "bg-white" : "bg-gray-300"
             }`}
             disabled={!blankIndexes.includes(index)}
@@ -117,7 +117,7 @@ const SpellTheWord = () => {
           onClick={handleSubmit}
           className={`${
             isTryAgain ? "bg-red-500 hover:bg-red-600" : "bg-green-600 hover:bg-green-700"
-          } text-white px-6 py-3 rounded-xl text-lg font-bold shadow-md transition`}
+          } text-white px-8 py-4 rounded-xl text-lg font-bold shadow-md transition`}
         >
           {isTryAgain ? "Try Again" : "Submit"}
         </button>
@@ -125,7 +125,7 @@ const SpellTheWord = () => {
         {isCorrect && (
           <button
             onClick={handleNext}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-xl text-lg font-bold shadow-md transition"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-md transition"
           >
             NEXT
           </button>

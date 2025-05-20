@@ -88,7 +88,7 @@ const StatesOfIndia = () => {
        {/* Back Button  */}
       <button
         onClick={() => navigate(-1)}
-        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-3 rounded-md shadow-md z-10 cursor-pointer"
+        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
         <FaArrowLeft className="text-2xl" />

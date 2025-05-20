@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const wordData = {
   A: [
@@ -14,7 +14,7 @@ const wordData = {
     "Artist",
     "Apron",
     "Avocado",
-],
+  ],
   B: [
     "Ball",
     "Bat",
@@ -317,11 +317,40 @@ const wordData = {
   ],
 };
 
-const LearnWords = () => {
+// Color palette for the alphabet circles
+const colorPalette = [
+  "bg-red-400",
+  "bg-blue-400",
+  "bg-green-400",
+  "bg-yellow-400",
+  "bg-purple-400",
+  "bg-pink-400",
+  "bg-indigo-400",
+  "bg-orange-400",
+  "bg-teal-400",
+  "bg-cyan-400",
+  "bg-lime-400",
+  "bg-emerald-400",
+  "bg-violet-400",
+  "bg-fuchsia-400",
+  "bg-rose-400",
+  "bg-amber-400",
+  "bg-sky-400",
+  "bg-indigo-400",
+  "bg-green-400",
+  "bg-yellow-400",
+  "bg-red-400",
+  "bg-blue-400",
+  "bg-purple-400",
+  "bg-pink-400",
+  "bg-orange-400",
+  "bg-teal-400",
+];
 
-  const navigate = useNavigate();
+const LearnWords = () => {
   const [selectedLetter, setSelectedLetter] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
 
   const handleCharClick = (char) => {
     setSelectedLetter(char);
@@ -333,61 +362,86 @@ const LearnWords = () => {
     setSelectedLetter(null);
   };
 
+  const handleGoBack = () => {
+    console.log("Go back clicked");
+    alert("Back button clicked!");
+  };
+
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
   return (
-    <div className="min-h-screen p-8 bg-gradient-to-br from-yellow-100 to-pink-100 text-center">
-      {/* Back Button  */}
+    <div className="min-h-screen p-4 md:p-8 bg-gradient-to-br from-blue-50 to-purple-50 text-center">
+      {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-3 rounded-md shadow-md z-10 cursor-pointer"
+        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
         <FaArrowLeft className="text-2xl" />
       </button>
 
-      <h1 className="text-4xl font-bold text-blue-700 mb-8">
-       Tap a Letter to Learn Words of the specific Character
-      </h1>
+      <div className="pt-16 md:pt-8">
+        <h1 className="text-3xl md:text-5xl font-bold text-blue-700 mb-8">
+          Tap a Letter to Learn Words!
+        </h1>
+      </div>
 
-      {/* ==== All Characters section ======== */}
-      <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10  mx-auto gap-4 max-w-5xl">
-        {letters.map((char) => (
-          <button
-            key={char}
-            onClick={() => handleCharClick(char)}
-            className="bg-blue-500 text-white text-2xl font-bold w-14 h-14 rounded-full shadow hover:bg-blue-600 transition cursor-pointer"
-          >
-            {char}
-          </button>
+      {/* Alphabet Circle Grid */}
+      <div className="grid grid-cols-3 max-w-6xl mx-auto mt-16 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-4 md:gap-8">
+        {letters.map((char, index) => (
+          <div key={char} className="flex justify-center">
+            <button
+              onClick={() => handleCharClick(char)}
+              className={`${colorPalette[index]} w-20 h-20 md:w-38 md:h-30 rounded-full shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 border-4 border-white`}
+            >
+              <span className="text-4xl md:text-5xl font-bold text-white">
+                {char}
+              </span>
+            </button>
+          </div>
         ))}
       </div>
 
-     {/* ==== PopUp Window while clciking a partiular character ==== */}
+      {/* Letter Word Popup */}
       {showPopup && (
-        <div className="fixed inset-0 flex items-center backdrop-blur-sm bg-white/30 justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl w-11/12 max-w-md overflow-y-auto max-h-[50vh] relative">
-            <h2 className="text-2xl bg-gradient-to-br from-yellow-100 to-pink-100 mb-4 font-bold text-blue-600 sticky top-0 z-10 w-full text-center p-1">
-              Words that start with "{selectedLetter}"
-            </h2>
-            <div className="flex flex-col rounded-md m-10">
-              {(wordData[selectedLetter] || ["No words found."]).map(
-                (word, idx) => (
-                  <div
-                    key={idx}
-                    className="py-3 px-4 text-lg text-center bg-white hover:bg-yellow-100 transition rounded-md cursor-pointer"
-                  >
-                    {word}
-                  </div>
-                )
-              )}
-            </div>
-            <button
-              onClick={handleClosePopup}
-              className="bg-red-500 text-white px-4 py-2 rounded-sm hover:bg-red-600 transition cursor-pointer mb-4" 
+        <div className="fixed inset-0 flex items-center backdrop-blur-sm bg-black/30 justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-11/12 max-w-md overflow-hidden relative">
+            <div
+              className={`${
+                colorPalette[letters.indexOf(selectedLetter)]
+              } py-4 px-6 text-center`}
             >
-              Close
-            </button>
+              <h2 className="text-3xl font-bold text-white mb-1">
+                Letter "{selectedLetter}"
+              </h2>
+              <p className="text-white text-lg">
+                Words that start with this letter
+              </p>
+            </div>
+
+            <div className="max-h-64 overflow-y-auto p-6">
+              <div className="grid grid-cols-1 gap-3">
+                {(wordData[selectedLetter] || ["No words found."]).map(
+                  (word, idx) => (
+                    <div
+                      key={idx}
+                      className="py-3 px-6 text-xl text-center bg-blue-50 hover:bg-blue-100 transition rounded-xl shadow-sm"
+                    >
+                      {word}
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-4 text-center">
+              <button
+                onClick={handleClosePopup}
+                className="bg-red-600 text-white px-8 py-3 rounded-md hover:bg-red-500 transition-all duration-300 shadow-md hover:shadow-lg text-lg font-medium cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}

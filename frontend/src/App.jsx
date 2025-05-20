@@ -84,12 +84,12 @@ function App() {
   
   ]);
 
-  return(
-  <>
-  <ToastContainer position="top-right" />
-  <RouterProvider router={router} />;
-  </>
-  ) 
+ return (
+  <div className="h-full">
+    <ToastContainer position="top-right" />
+    <RouterProvider router={router} />
+  </div>
+);
 }
 
 export default App;

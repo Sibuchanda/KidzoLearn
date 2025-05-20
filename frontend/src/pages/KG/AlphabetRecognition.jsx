@@ -69,7 +69,7 @@ export default function AlphabetObjectGame() {
               setSelected({ letter, ...data });
               speak(letter, data.word);
             }}
-            className="cursor-pointer bg-blue-500 text-pink-600 font-extrabold text-8xl rounded-2xl shadow-lg hover:scale-105 transition transform py-20 text-center hover:bg-blue-800"
+            className="cursor-pointer bg-blue-500 text-white font-extrabold text-8xl rounded-2xl shadow-lg hover:scale-105 transition transform py-20 text-center hover:bg-blue-800"
 
           >
             {letter}
