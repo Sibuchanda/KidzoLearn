@@ -1,6 +1,8 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/home/HomePage";
+import Signup from "./auth/signup";
+import Login from "./auth/login";
 import Dashboard from "./pages/dashboard/Dashboard";
 import KGActivities from "./pages/KG/KgActivities";
 import ColorRecognition from "./pages/KG/ColorRecognition";
@@ -28,6 +30,14 @@ function App() {
     {
       path: "/",
       element: <HomePage />,
+    },
+    {
+      path: "/signup",
+      element: <Signup />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
     },
     {
       path: "/dashboard",
