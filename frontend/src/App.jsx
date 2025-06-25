@@ -19,6 +19,8 @@ import StatesOfIndia from "./pages/ClassOne/StatesOfIndia";
 
 import ContactUs from "./pages/dashboard/ContactUs/ContactUs";
 
+import PrivateRoute from "./authenticate/PrivateRoute";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -41,7 +43,11 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: <Dashboard />,
+      element:(
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+      )
     },
     {
       path: "/KGActivities",

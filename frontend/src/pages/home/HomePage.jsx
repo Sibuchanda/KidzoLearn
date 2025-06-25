@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 
-
 // ========== Home page section ============
 export default function HomePage() {
   return (
@@ -10,7 +9,23 @@ export default function HomePage() {
       className="min-h-screen bg-cover bg-center p-6 flex flex-col items-center"
       style={{ backgroundImage: "url('/images/bg2.png')" }}
     >
-     {/* Heading  */}
+      {/*SignUp-SinIn*/}
+      <div className="w-full flex justify-end px-6 pt-4 absolute top-0">
+        <div className="space-x-4">
+          <Link to="/signup">
+            <button className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-800 transition">
+              Signup
+            </button>
+          </Link>
+          <Link to="/login">
+            <button className="border border-blue-600 text-blue-600 px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-600 hover:text-white transition">
+              Signin
+            </button>
+          </Link>
+        </div>
+      </div>
+
+      {/* Heading  */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -30,20 +45,24 @@ export default function HomePage() {
         transition={{ delay: 0.3, duration: 0.6 }}
         className="mb-16"
       >
-        <Link to="/dashboard">
+        <Link to="/signup">
           <button className="bg-blue-700 text-white px-6 py-3 rounded-sm shadow-lg hover:bg-blue-500 transition font-bold text-lg hover:cursor-pointer">
             Get Started
           </button>
         </Link>
       </motion.div>
 
-       {/* === Features Section ==== */}
+      {/* === Features Section ==== */}
       <section className="max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-8 text-center mb-20 mt-20">
         <motion.div
           whileHover={{ scale: 1.1 }}
           className="bg-white rounded-xl p-6 shadow-lg"
         >
-          <img src={`/homepageImg/fun.png`} size={30} className="text-purple-500 mb-2 mx-auto" />
+          <img
+            src={`/homepageImg/fun.png`}
+            size={30}
+            className="text-purple-500 mb-2 mx-auto"
+          />
           <h3 className="font-bold text-pink-600">Fun Games</h3>
           <p className="text-sm text-gray-600">
             Play & learn with fun activities
@@ -54,7 +73,11 @@ export default function HomePage() {
           whileHover={{ scale: 1.1 }}
           className="bg-white rounded-xl p-6 shadow-lg"
         >
-          <img src={`/homepageImg/class.png`} size={30} className="text-purple-500 mb-2 mx-auto" />
+          <img
+            src={`/homepageImg/class.png`}
+            size={30}
+            className="text-purple-500 mb-2 mx-auto"
+          />
           <h3 className="font-bold text-blue-600">Seperate class</h3>
           <p className="text-sm text-gray-600">
             we have interactive lessions for class KG and class One
@@ -65,7 +88,11 @@ export default function HomePage() {
           whileHover={{ scale: 1.1 }}
           className="bg-white rounded-xl p-6 shadow-lg"
         >
-          <img src={`/homepageImg/audio.png`} size={30} className="text-purple-500 mb-2 mx-auto" />
+          <img
+            src={`/homepageImg/audio.png`}
+            size={30}
+            className="text-purple-500 mb-2 mx-auto"
+          />
           <h3 className="font-bold text-green-600">Audio Features</h3>
           <p className="text-sm text-gray-600">
             Learn through audio for non-readers
@@ -76,9 +103,15 @@ export default function HomePage() {
           whileHover={{ scale: 1.1 }}
           className="bg-white rounded-xl p-6 shadow-lg"
         >
-          <img src={`/homepageImg/alltopic.png`} size={30} className="text-purple-500 mb-2 mx-auto" />
+          <img
+            src={`/homepageImg/alltopic.png`}
+            size={30}
+            className="text-purple-500 mb-2 mx-auto"
+          />
           <h3 className="font-bold text-yellow-600">All topic</h3>
-          <p className="text-sm text-gray-600">Here you can learn English, Math, geography, Science etc</p>
+          <p className="text-sm text-gray-600">
+            Here you can learn English, Math, geography, Science etc
+          </p>
         </motion.div>
       </section>
 

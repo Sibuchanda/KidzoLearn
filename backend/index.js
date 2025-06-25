@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import cors from 'cors'
 import cookieParser from "cookie-parser";
-import userRoute from './routes/user.js'
+import userRoute from './routes/user.js';
+import taskRoute from './routes/task.js';
 
 const app = express();
 
@@ -30,13 +31,10 @@ try {
 }
 
 
-app.get('/home',(req,res)=>{
-    res.send("Hello");    
-});
 
 
 app.use("/user",userRoute);
-// app.use("/task",taskRoute);
+app.use("/task",taskRoute);
 
 
 app.listen(PORT, ()=>{
