@@ -6,7 +6,7 @@ import { signup, login, logout } from '../controler/userControler.js';
 const router = express.Router();
 
 router.post('/signup', signup);
-router.post('/signin',login);
+router.post('/login',login);
 router.post('/logout', logout);
 
 

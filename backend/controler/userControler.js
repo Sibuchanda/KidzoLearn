@@ -35,6 +35,7 @@ export const signup = async (req, res) => {
                 // res.status(400).json({errors:validation.error.errors});
                 //-------- Without sending the whole error(the above line display the errors array), we display only the error message not all things. For that we use the map method, map method display only a specific item into an array
                 const errorMessage = validation.error.errors.map((err) => err.message);
+                console.log(errorMessage);
                 return res.status(400).json({ errors: errorMessage });
             }
 
@@ -96,6 +97,7 @@ export const login = async (req, res) => {
             message: "User logged in successfully",
             user: { _id: user._id, email: user.email, token }
         });
+        console.log("User logged successfully...")
     } catch (err) {
         console.log(err);
         res.status(400).json({ message: "Error occurred during UserLogin" });
@@ -106,4 +108,3 @@ export const login = async (req, res) => {
 export const logout = async(req,res)=>{
     res.send("Logout successful...");
 }
-

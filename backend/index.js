@@ -5,11 +5,12 @@ import cors from 'cors'
 import cookieParser from "cookie-parser";
 import userRoute from './routes/user.js'
 
+const app = express();
+
 dotenv.config();
 const PORT = process.env.PORT || 8000;
-const DB_URI=process.env.MONGODB_URI;
+const DB_URI="mongodb+srv://sibuchanda457:fanCgDryz1wEgaqh@cluster0.nq9wq9f.mongodb.net/kidzo_school"
 
-const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
@@ -23,7 +24,7 @@ app.use(cors({
 //--------- Database connection ---------
 try {
     await mongoose.connect(DB_URI)
-    console.log("Successfully connected to MongoDB...");
+    console.log("Successfully connected to MongoDB...!");
 } catch (err) {
     console.log(err);
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';  // Removed useNavigate
 import axios from 'axios';
-import toast from 'react-hot-toast';
+import { toast } from "react-toastify";
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -11,7 +11,7 @@ function Login() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        'http://localhost:4002/user/login',
+        'http://localhost:8000/user/login',
         { email, password },
         { withCredentials: true, headers: { 'Content-Type': 'application/json' } }
       );
@@ -24,7 +24,7 @@ function Login() {
         toast.success(data.message || "User Login successfully");
 
         // Force a page reload to ensure the token is available globally
-        window.location.href = "/";  // This reloads the app and resolves the first-time issue
+        window.location.href = "/dashboard";  // This reloads the app and resolves the first-time issue
       } else {
         throw new Error("Token not found in response");
       }
