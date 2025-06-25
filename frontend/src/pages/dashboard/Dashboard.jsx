@@ -31,7 +31,7 @@ export default function DashboardPage() {
           </header>
           <ul className="flex flex-col">
             <SidebarItem icon={<FaTachometerAlt />} text="Dashboard" />
-            <SidebarItem icon={<FaLink />} text="Progress" />
+            <SidebarItem icon={<FaLink />} text="Progress" to="/progress"/>
             <SidebarItem icon={<FaComments />} text="Contact us" to="/ContactUs"/>
           </ul>
         </aside>

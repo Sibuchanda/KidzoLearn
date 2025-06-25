@@ -18,6 +18,7 @@ import PrepositionPlay from "./pages/ClassOne/PrepositionPlay";
 import StatesOfIndia from "./pages/ClassOne/StatesOfIndia";
 
 import ContactUs from "./pages/dashboard/ContactUs/ContactUs";
+import Progress from "./pages/dashboard/Progress";
 
 import PrivateRoute from "./authenticate/PrivateRoute";
 
@@ -96,6 +97,10 @@ function App() {
     {
       path: "/ContactUs",
       element: <ContactUs />,
+    },
+    {
+      path: "/progress",
+      element: <Progress />,
     },
   
   ]);

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FaVolumeUp, FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from 'axios';
 
 const animals = [
   { name: "Cat", image: "cat.png", sound: "cat.wav" },
@@ -19,9 +21,25 @@ const AnimalSoundFlashcards = () => {
   const [audio] = useState(new Audio());
   const navigate=useNavigate();
 
-  const playSound = (soundFile) => {
+  const playSound = async (soundFile, animaleName) => {
     audio.src = `/animalSound/${soundFile}`;
     audio.play();
+
+    const email = localStorage.getItem("email");
+    if(email){
+      try{
+        const {data} = await axios.post("http://localhost:8000/task/play",{
+          email,
+          activityName: "AnimalRecognition",
+          taskKey: animaleName,
+        });
+        if(data.message==="+1 point earned!"){
+            toast.success(data.message || "+1 point earned!");
+        }
+      }catch(err){
+        console.error("Error updating points:", err);
+      }
+    }
   };
 
   return (
@@ -43,7 +61,7 @@ const AnimalSoundFlashcards = () => {
         {animals.map((animal) => (
           <div
             key={animal.name}
-            onClick={() => playSound(animal.sound)}
+            onClick={() => playSound(animal.sound, animal.name)}
             className="cursor-pointer text-center hover:scale-105 transition-transform duration-300"
           >
             <img

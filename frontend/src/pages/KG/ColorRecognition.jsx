@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const colors = [
   { name: 'Red', hex: '#EF4444' },
@@ -15,15 +17,31 @@ const colors = [
 export default function ColorRecognition() {
   const [backgroundColor, setBackgroundColor] = useState('#FEFCE8');
 
-  const speakColor = (colorName, hex) => {
-    setBackgroundColor(hex);
-    
-    const utterance = new SpeechSynthesisUtterance(colorName);
-    utterance.pitch = 1.3;
-    utterance.rate = 0.9;
-    
-    speechSynthesis.speak(utterance);
-  };
+ const speakColor = async (colorName, hex) => {
+  setBackgroundColor(hex);
+
+  const utterance = new SpeechSynthesisUtterance(colorName);
+  utterance.pitch = 1.3;
+  utterance.rate = 0.9;
+  speechSynthesis.speak(utterance);
+
+  const email = localStorage.getItem("email");
+  if (email) {
+    try {
+      const { data } = await axios.post("http://localhost:8000/task/play", {
+        email,
+        activityName: "ColorRecognition",
+        taskKey: colorName,
+      });
+      if(data.message==="+1 point earned!"){
+        toast.success(data.message || "+1 point earned!");
+      }
+    } catch (err) {
+      console.error("Error updating points:", err);
+    }
+  }
+};
+
 
   return (
     <div

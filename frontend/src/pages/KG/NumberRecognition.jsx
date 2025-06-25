@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FaArrowLeft, FaVolumeUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const numbers = Array.from({ length: 10 }, (_, i) => i);
 
@@ -9,11 +11,28 @@ export default function NumberBounce() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentNumber = numbers[currentIndex];
 
-  const speakNumber = (number) => {
+  const speakNumber = async (number) => {
     const utterance = new SpeechSynthesisUtterance(number.toString());
     utterance.pitch = 1.2;
     utterance.rate = 0.9;
     speechSynthesis.speak(utterance);
+
+    const email = localStorage.getItem("email");
+    if (email) {
+      try {
+        const { data } = await axios.post("http://localhost:8000/task/play", {
+          email,
+          activityName: "NumberRecognition",
+          taskKey: number.toString(),
+        });
+
+        if (data.message === "+1 point earned!") {
+          toast.success("+1 point earned!");
+        }
+      } catch (err) {
+        console.error("Error updating points:", err);
+      }
+    }
   };
 
   const handlePrev = () => {

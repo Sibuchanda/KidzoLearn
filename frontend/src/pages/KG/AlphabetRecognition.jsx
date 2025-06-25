@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { FaVolumeUp, FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-// import "./AlphabetObjectGame.css";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const alphabetData = {
   A: { word: "Apple", emoji: "🍎" },
@@ -36,13 +37,30 @@ export default function AlphabetObjectGame() {
   const navigate = useNavigate();
   const [selected, setSelected] = useState(null);
 
-  const speak = (letter, word) => {
+  const speak = async (letter, word) => {
     const utterance = new SpeechSynthesisUtterance(`${letter}, ${word}`);
     utterance.pitch = 1.2;
     utterance.rate = 0.9;
-    speechSynthesis.cancel(); // Stop any previous speech
+    speechSynthesis.cancel();
     speechSynthesis.speak(utterance);
-  };
+
+    const email = localStorage.getItem('email');
+    if(email){
+      try{
+      const {data} = await axios.post("http://localhost:8000/task/play",{
+        email,
+        activityName:"AlphabetRecognition",
+        taskKey: letter
+      });
+
+      if(data.message==="+1 point earned!"){
+        toast.success("+1 point earned!");
+      }
+    } catch(err){
+     console.error("Error updating points:", err);
+    }
+  }
+};
   
 
   return (

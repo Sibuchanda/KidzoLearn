@@ -21,6 +21,7 @@ function Login() {
       // Check if the token exists in the response
       if (data.user && data.user.token) {
         localStorage.setItem("jwt", data.user.token);  // Save token
+        localStorage.setItem('email',data.user.email);
         toast.success(data.message || "User Login successfully");
 
         // Force a page reload to ensure the token is available globally
