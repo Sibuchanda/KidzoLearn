@@ -18,7 +18,6 @@ function Login() {
 
       // Check if the token exists in the response
       if (data.user && data.user.token) {
-        localStorage.setItem("jwt", data.user.token);  // Save token
         localStorage.setItem('username',data.user.username);
         toast.success(data.message || "User Login successfully");
 

@@ -1,7 +1,9 @@
-import { FaTachometerAlt, FaLink, FaComments, FaBell } from "react-icons/fa";
+import { FaTachometerAlt, FaLink, FaComments, FaBell, FaUser, FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import axios from 'axios';
+import { toast } from "react-toastify";
 
 
 const classIcons = {
@@ -9,15 +11,41 @@ const classIcons = {
   "Class 1": "✏️",
 };
 
-
 export default function DashboardPage() {
   const [userName, setUserName] = useState("User");
+  const [userEmail, setUserEmail] = useState("user@example.com");
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
+  const profileRef = useRef(null);
 
-  useEffect(()=>{
-   const username = localStorage.getItem("username");
-   if(username) setUserName(username);
-  },[])
+
+  // =========== Fetching username and email ========
+  useEffect(() => {
+    axios.get("http://localhost:8000/user/profile", {
+      withCredentials: true,
+    })
+    .then(res => {
+      setUserEmail(res.data.email);
+      setUserName(res.data.username);
+    })
+    .catch(err => {
+      console.error("Error fetching email:", err);
+    });
+  }, []);
+
+  // ============= Profile menu open/close ===========
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
 
   function handleUserClick(className) {
     if (className === "KG") {
@@ -25,6 +53,27 @@ export default function DashboardPage() {
     } else if (className === "Class 1") {
       navigate("/ClassOneActivities");
     }
+  }
+
+async function handleLogout() {
+  const val = confirm("Do you want to logout?");
+  if(val){
+  try {
+    await axios.post("http://localhost:8000/user/logout", {}, {
+      withCredentials: true,
+    });
+    navigate("/login");
+    localStorage.removeItem('username');
+    toast.success("Logged out successfully");
+  } catch (err) {
+    console.error("Logout failed", err);
+    toast.error("Logout failed");
+  }
+ }
+}
+
+  function toggleProfile() {
+    setIsProfileOpen(!isProfileOpen);
   }
 
   return (
@@ -40,8 +89,8 @@ export default function DashboardPage() {
           </header>
           <ul className="flex flex-col">
             <SidebarItem icon={<FaTachometerAlt />} text="Dashboard" />
-            <SidebarItem icon={<FaLink />} text="Progress" to="/progress"/>
-            <SidebarItem icon={<FaComments />} text="Contact us" to="/ContactUs"/>
+            <SidebarItem icon={<FaLink />} text="Progress" to="/progress" />
+            <SidebarItem icon={<FaComments />} text="Contact us" to="/ContactUs" />
           </ul>
         </aside>
 
@@ -49,8 +98,42 @@ export default function DashboardPage() {
         <main className="ml-64 w-full px-8 py-6 text-pink-800">
           {/* Navbar */}
           <nav className="flex justify-end items-center mb-6">
-            <div className="flex items-center gap-4 bg-blue-500 px-4 py-2 rounded-full backdrop-blur-md shadow text-white font-medium cursor-pointer">
-              <span>B</span>
+            <div className="relative" ref={profileRef}>
+              <div 
+                className="flex items-center gap-4 bg-blue-500 px-4 py-2 rounded-full backdrop-blur-md shadow text-white font-medium cursor-pointer"
+                onClick={toggleProfile}
+              >
+                <span>{userName?.[0]?.toUpperCase() || "U"}</span>
+              </div>
+
+              {isProfileOpen && (
+                <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                  <div className="px-4 py-3 border-b border-gray-100">
+                    <p className="text-lg font-semibold text-gray-800">
+                      Hello, {userName}
+                    </p>
+                  </div>
+                  
+                  <div className="px-4 py-3 border-b border-gray-100">
+                    <div className="flex items-center gap-2">
+                      <FaUser className="text-gray-500 text-sm" />
+                      <p className="text-sm text-gray-600">
+                        {userEmail}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="px-4 py-2">
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-red-600 hover:bg-red-50 rounded-md transition-colors cursor-pointer"
+                    >
+                      <FaSignOutAlt className="text-sm" />
+                      <span>Logout</span>
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </nav>
 
@@ -88,10 +171,10 @@ function SidebarItem({ icon, text, to }) {
   return (
     <li className="hover:bg-blue-100 px-6 py-4 transition text-md border-b border-white cursor-pointer">
       <Link to={to}>
-      <div className="flex items-center gap-3 text-pink-800 font-semibold">
-        <span className="text-xl">{icon}</span>
-        <span>{text}</span>
-      </div>
+        <div className="flex items-center gap-3 text-pink-800 font-semibold">
+          <span className="text-xl">{icon}</span>
+          <span>{text}</span>
+        </div>
       </Link>
     </li>
   );
