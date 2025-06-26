@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { toast } from "react-toastify";
 
 const wordData = {
@@ -358,22 +358,24 @@ const LearnWords = () => {
     setSelectedLetter(char);
     setShowPopup(true);
 
-    const email = localStorage.getItem("email");
-    if(email){
-      try{
-        const {data} = await axios.post("http://localhost:8000/task/play",{
-          email,
+
+     // ========== Point claim section ========-=====
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/task/play",
+        {
           activityName: "WordsRecognition",
           taskKey: char,
-        });
-        if(data.message==="+1 point earned!"){
-          toast.success(data.message || "+1 point earned!");
-         }
-      }catch(err){
-         console.error("Error updating points:", err);
+        },
+        { withCredentials: true }
+      );
+      if (data.message === "+1 point earned!") {
+        toast.success(data.message);
       }
+    } catch (err) {
+      console.error("Error updating points:", err);
     }
-  };
+};
 
   const handleClosePopup = () => {
     setShowPopup(false);

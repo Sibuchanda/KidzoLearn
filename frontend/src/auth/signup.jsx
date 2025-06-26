@@ -32,7 +32,6 @@ function Signup() {
       );
       toast.success(data.message || "User registered successfully");
       navigateTo("/login");
-      localStorage.setItem("jwt", data.user.token);
       setUserName("");
       setEmail("");
       setPassword("");

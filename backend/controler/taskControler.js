@@ -1,29 +1,30 @@
 import User from '../model/userModel.js';
 
 
+// routes/task.js or controller
 export const completeTask = async (req, res) => {
   try {
-    const { email, activityName, taskKey } = req.body;
+    const { activityName, taskKey } = req.body;
 
-    if (!email || !activityName || !taskKey) {
+    if (!activityName || !taskKey) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: "User not found" });
+    const user = req.user; // comes from middleware
 
-    // Initializing activityProgress map if it does not  exists
     if (!user.activityProgress) {
       user.activityProgress = new Map();
     }
 
     let completedTasks = user.activityProgress.get(activityName) || [];
+
     if (completedTasks.includes(taskKey)) {
       return res.status(200).json({
         message: "Task already completed",
         points: user.points
       });
     }
+
     completedTasks.push(taskKey);
     user.activityProgress.set(activityName, completedTasks);
     user.points = (user.points || 0) + 1;
@@ -41,16 +42,18 @@ export const completeTask = async (req, res) => {
 };
 
 
+
+
 export const getUserProgress = async (req, res) => {
-  const { email } = req.query;
-  if (!email) return res.status(400).json({ message: "Email required" });
-
-  const user = await User.findOne({ email });
-  if (!user) return res.status(404).json({ message: "User not found" });
-
-  res.status(200).json({
-    username: user.username,
-    points: user.points,
-    activityProgress: Object.fromEntries(user.activityProgress || []),
-  });
+  try {
+    const user = req.user; 
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const { username, points, activityProgress } = user;
+    res.status(200).json({ username, points, activityProgress });
+  } catch (err) {
+    console.error("Error fetching progress:", err);
+    res.status(500).json({ message: "Server error" });
+  }
 };

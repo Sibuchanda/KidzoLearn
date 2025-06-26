@@ -16,11 +16,6 @@ const userSchema = new mongoose.Schema({
     required: true,
     select: false
   },
-  confirmpassword: {
-    type: String,
-    required: true,
-    select: false
-  },
   token: {
     type: String
   },

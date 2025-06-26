@@ -16,12 +16,10 @@ function Login() {
         { withCredentials: true, headers: { 'Content-Type': 'application/json' } }
       );
 
-      console.log('Login Response:', data);
-
       // Check if the token exists in the response
       if (data.user && data.user.token) {
         localStorage.setItem("jwt", data.user.token);  // Save token
-        localStorage.setItem('email',data.user.email);
+        localStorage.setItem('username',data.user.username);
         toast.success(data.message || "User Login successfully");
 
         // Force a page reload to ensure the token is available globally
@@ -70,7 +68,7 @@ function Login() {
 
             <button
               type='submit'
-              className='w-full p-3 bg-blue-600 text-white hover:bg-blue-900 duration-300 rounded-xl font-semibold'
+              className='w-full p-3 bg-blue-600 text-white hover:bg-blue-900 duration-300 rounded-xl font-semibold cursor-pointer'
             >
               Login
             </button>

@@ -25,20 +25,21 @@ export default function ColorRecognition() {
   utterance.rate = 0.9;
   speechSynthesis.speak(utterance);
 
-  const email = localStorage.getItem("email");
-  if (email) {
+   // ========== Point claim section ========-=====
     try {
-      const { data } = await axios.post("http://localhost:8000/task/play", {
-        email,
+    const { data } = await axios.post(
+      "http://localhost:8000/task/play",
+      {
         activityName: "ColorRecognition",
         taskKey: colorName,
-      });
-      if(data.message==="+1 point earned!"){
-        toast.success(data.message || "+1 point earned!");
-      }
-    } catch (err) {
-      console.error("Error updating points:", err);
+      },
+      { withCredentials: true }
+    );
+    if (data.message === "+1 point earned!") {
+      toast.success(data.message);
     }
+  } catch (err) {
+    console.error("Error updating points:", err);
   }
 };
 

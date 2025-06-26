@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaVolumeUp, FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import axios from 'axios';
+import axios from "axios";
 
 const animals = [
   { name: "Cat", image: "cat.png", sound: "cat.wav" },
@@ -19,32 +19,33 @@ const animals = [
 
 const AnimalSoundFlashcards = () => {
   const [audio] = useState(new Audio());
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const playSound = async (soundFile, animaleName) => {
     audio.src = `/animalSound/${soundFile}`;
     audio.play();
 
-    const email = localStorage.getItem("email");
-    if(email){
-      try{
-        const {data} = await axios.post("http://localhost:8000/task/play",{
-          email,
+    // ========== Point claim section ========-=====
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/task/play",
+        {
           activityName: "AnimalRecognition",
           taskKey: animaleName,
-        });
-        if(data.message==="+1 point earned!"){
-            toast.success(data.message || "+1 point earned!");
-        }
-      }catch(err){
-        console.error("Error updating points:", err);
+        },
+        { withCredentials: true }
+      );
+      if (data.message === "+1 point earned!") {
+        toast.success(data.message);
       }
+    } catch (err) {
+      console.error("Error updating points:", err);
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 to-pink-100 p-6">
-    {/* Back to KG Activities */}
+      {/* Back to KG Activities */}
       <button
         onClick={() => navigate(-1)}
         className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"

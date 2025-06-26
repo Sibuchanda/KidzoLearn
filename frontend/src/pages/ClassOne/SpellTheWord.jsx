@@ -81,21 +81,23 @@ const SpellTheWord = () => {
     setIsTryAgain(false);
     setIsCorrect(false);
 
-    const email = localStorage.getItem("email");
+
     const currentWord = wordsData[currentIndex].word;
-    if(email){
-      try{
-        const {data} = await axios.post("http://localhost:8000/task/play",{
-          email,
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/task/play",
+        {
           activityName: "WordCompletion",
           taskKey: currentWord,
-        });
-        if(data.message==="+1 point earned!"){
-          toast.success(data.message || "+1 point earned!");
-         }
-      }catch(err){
-         console.error("Error updating points:", err);
+        },
+        { withCredentials: true }
+      );
+
+      if (data.message === "+1 point earned!") {
+        toast.success(data.message);
       }
+    } catch (err) {
+      console.error("Error updating points:", err);
     }
   };
 

@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
-
-
 const questions = [
   { question: "2 + 3 =", answer: "5", hintExplanation: "2 + 3 = 5" },
   { question: "4 + ? = 9", answer: "5", hintExplanation: "9 - 4 = 5" },
@@ -31,11 +28,10 @@ export default function BasicMath() {
   const currentQ = questions[currentIndex];
   const navigate = useNavigate();
 
-
-  // Extract numbers from the question for apple visualization
+  // Extracting numbers from the question for apple visualization
   const extractNumbers = (question) => {
     const numbers = question.match(/\d+/g);
-    return numbers ? numbers.map(num => parseInt(num)) : [];
+    return numbers ? numbers.map((num) => parseInt(num)) : [];
   };
 
   const renderApples = (count) => {
@@ -45,15 +41,20 @@ export default function BasicMath() {
       const remainder = count % 10;
       const groupApples = "🍎".repeat(10);
       const remainderApples = "🍎".repeat(remainder);
-      
+
       return (
         <div className="flex flex-wrap justify-center gap-2">
-          {Array(groups).fill(0).map((_, i) => (
-            <div key={i} className="border-2 border-dashed border-green-300 rounded-lg p-2">
-              <div className="text-xs text-green-600 mb-1">Group of 10</div>
-              <div className="text-2xl leading-none">{groupApples}</div>
-            </div>
-          ))}
+          {Array(groups)
+            .fill(0)
+            .map((_, i) => (
+              <div
+                key={i}
+                className="border-2 border-dashed border-green-300 rounded-lg p-2"
+              >
+                <div className="text-xs text-green-600 mb-1">Group of 10</div>
+                <div className="text-2xl leading-none">{groupApples}</div>
+              </div>
+            ))}
           {remainder > 0 && (
             <div className="border-2 border-dashed border-orange-300 rounded-lg p-2">
               <div className="text-xs text-orange-600 mb-1">Remainder</div>
@@ -65,9 +66,7 @@ export default function BasicMath() {
     } else {
       // For numbers <= 10, show normally
       return (
-        <div className="text-3xl leading-relaxed">
-          {"🍎".repeat(count)}
-        </div>
+        <div className="text-3xl leading-relaxed">{"🍎".repeat(count)}</div>
       );
     }
   };
@@ -104,23 +103,25 @@ export default function BasicMath() {
     setShowHint(false);
     setShowNext(false);
 
-    const email = localStorage.getItem("email");
+
+     // ========== Point claim section ========-=====
     const currentMath = questions[currentIndex].question;
-    if(email){
-      try{
-        const {data} = await axios.post("http://localhost:8000/task/play",{
-          email,
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/task/play",
+        {
           activityName: "MathPractice",
           taskKey: currentMath,
-        });
-        if(data.message==="+1 point earned!"){
-          toast.success(data.message || "+1 point earned!");
-         }
-      }catch(err){
-         console.error("Error updating points:", err);
+        },
+        { withCredentials: true }
+      );
+      if (data.message === "+1 point earned!") {
+        toast.success(data.message);
       }
+    } catch (err) {
+      console.error("Error updating points:", err);
     }
-  };
+};
 
   const goBack = () => {
     console.log("Going back...");
@@ -130,14 +131,14 @@ export default function BasicMath() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-yellow-100 p-4 flex flex-col items-center justify-center">
-       {/* Back Button */}
-            <button
-              onClick={() => navigate(-1)}
-              className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
-              aria-label="Go back"
-            >
-              <FaArrowLeft className="text-2xl" />
-            </button>
+      {/* Back Button */}
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
+        aria-label="Go back"
+      >
+        <FaArrowLeft className="text-2xl" />
+      </button>
 
       <div className="w-full max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold text-purple-700 mb-8 text-center">
@@ -148,7 +149,9 @@ export default function BasicMath() {
           {/* Question Section */}
           <div className="text-center mb-8">
             <p className="text-3xl md:text-4xl font-bold mb-6 flex items-center justify-center gap-3 flex-wrap">
-              <span>{currentQ.question.replace(/\d+/g, (match) => `${match}`)}</span>
+              <span>
+                {currentQ.question.replace(/\d+/g, (match) => `${match}`)}
+              </span>
               <input
                 type="text"
                 value={userAnswer}
@@ -164,7 +167,10 @@ export default function BasicMath() {
           <div className="mb-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {numbers.map((number, index) => (
-                <div key={index} className="bg-gradient-to-br from-green-50 to-yellow-50 rounded-xl p-4 border-2 border-green-200">
+                <div
+                  key={index}
+                  className="bg-gradient-to-br from-green-50 to-yellow-50 rounded-xl p-4 border-2 border-green-200"
+                >
                   <div className="text-center mb-3">
                     <span className="text-2xl font-bold text-green-700">
                       Number: {number}
@@ -210,13 +216,15 @@ export default function BasicMath() {
 
           {/* Message and Hint Section */}
           {message && (
-            <div className={`text-center p-4 rounded-xl mb-4 ${
-              message.includes("Correct") 
-                ? "bg-green-100 text-green-800 border-2 border-green-300" 
-                : message.includes("Try again")
-                ? "bg-red-100 text-red-800 border-2 border-red-300"
-                : "bg-blue-100 text-blue-800 border-2 border-blue-300"
-            }`}>
+            <div
+              className={`text-center p-4 rounded-xl mb-4 ${
+                message.includes("Correct")
+                  ? "bg-green-100 text-green-800 border-2 border-green-300"
+                  : message.includes("Try again")
+                  ? "bg-red-100 text-red-800 border-2 border-red-300"
+                  : "bg-blue-100 text-blue-800 border-2 border-blue-300"
+              }`}
+            >
               <p className="text-xl font-semibold">{message}</p>
             </div>
           )}

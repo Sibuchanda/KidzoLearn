@@ -5,7 +5,7 @@ import {
   FaMapMarkedAlt,
   FaArrowLeft,
   FaArrowsAlt
-} from "react-icons/fa";  // Only import icons that you are actually using
+} from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
 
@@ -30,13 +30,13 @@ const activities = [
   },
 {
     name: "Play with Prepositions",
-    icon: <FaArrowsAlt className="text-4xl text-white" />, // Changed icon to FaArrowsAlt
+    icon: <FaArrowsAlt className="text-4xl text-white" />,
     bgColor: "bg-yellow-400",
     route: "/PrepositionPlay",
   },
 {
   name: "States of India",
-  icon: <FaMapMarkedAlt className="text-4xl text-white" />, // 📍 Better map-related icon
+  icon: <FaMapMarkedAlt className="text-4xl text-white" />,
   bgColor: "bg-sky-400",
   route: "/StatesOfIndia",
 }

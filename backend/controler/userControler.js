@@ -48,13 +48,10 @@ export const signup = async (req, res) => {
             // -------------------- Creating a new User and Save into the database --------
             //Hashing the password
             const hashPassword = await bcrypt.hash(password, 10);
-            const hashconfirmPassword = await bcrypt.hash(confirmpassword, 10);
-            const newUser = new User({ username, email, password: hashPassword, confirmpassword: hashconfirmPassword });
+            const newUser = new User({ username, email, password: hashPassword});
             await newUser.save();
 
             if (newUser) {
-                // Generating Tokens
-                const token = await generateToken(newUser._id, res);
                 res.status(201).json({ message: "User registered sucessfully", newUser });
             }
         }
@@ -95,9 +92,8 @@ export const login = async (req, res) => {
         // Return the user data along with the token
         res.status(200).json({
             message: "User logged in successfully",
-            user: { _id: user._id, email: user.email, token }
+            user: { username: user.username, token }
         });
-        console.log("User logged successfully...")
     } catch (err) {
         console.log(err);
         res.status(400).json({ message: "Error occurred during UserLogin" });

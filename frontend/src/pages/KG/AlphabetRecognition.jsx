@@ -44,29 +44,27 @@ export default function AlphabetObjectGame() {
     speechSynthesis.cancel();
     speechSynthesis.speak(utterance);
 
-    const email = localStorage.getItem('email');
-    if(email){
-      try{
-      const {data} = await axios.post("http://localhost:8000/task/play",{
-        email,
-        activityName:"AlphabetRecognition",
-        taskKey: letter
-      });
-
-      if(data.message==="+1 point earned!"){
-        toast.success("+1 point earned!");
+    // ------ Point claim section -----
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/task/play",
+        {
+          activityName: "AlphabetRecognition",
+          taskKey: letter,
+        },
+        { withCredentials: true }
+      );
+      if (data.message === "+1 point earned!") {
+        toast.success(data.message);
       }
-    } catch(err){
-     console.error("Error updating points:", err);
+    } catch (err) {
+      console.error("Error updating points:", err);
     }
-  }
-};
-  
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 to-pink-100 p-6 relative">
-
-       {/* Back to KG Activities */}
+      {/* Back to KG Activities */}
       <button
         onClick={() => navigate(-1)}
         className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
@@ -88,7 +86,6 @@ export default function AlphabetObjectGame() {
               speak(letter, data.word);
             }}
             className="cursor-pointer bg-blue-500 text-white font-extrabold text-8xl rounded-2xl shadow-lg hover:scale-105 transition transform py-20 text-center hover:bg-blue-800"
-
           >
             {letter}
           </div>
@@ -103,7 +100,9 @@ export default function AlphabetObjectGame() {
         >
           <div className="bg-white p-25 rounded-xl shadow-xl text-center max-w-sm">
             <div className="text-9xl">{selected.emoji}</div>
-            <h2 className="text-6xl font-bold mt-4 text-pink-700">{selected.letter}</h2>
+            <h2 className="text-6xl font-bold mt-4 text-pink-700">
+              {selected.letter}
+            </h2>
             <p className="text-2xl mt-2">{selected.word}</p>
             <button
               onClick={(e) => {

@@ -1,14 +1,23 @@
 import { FaTachometerAlt, FaLink, FaComments, FaBell } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 
 const classIcons = {
   KG: "🧸",
   "Class 1": "✏️",
 };
 
+
 export default function DashboardPage() {
+  const [userName, setUserName] = useState("User");
   const navigate = useNavigate();
+
+  useEffect(()=>{
+   const username = localStorage.getItem("username");
+   if(username) setUserName(username);
+  },[])
 
   function handleUserClick(className) {
     if (className === "KG") {
@@ -47,7 +56,7 @@ export default function DashboardPage() {
 
           <div>
             <h1 className="text-4xl font-extrabold mb-2 text-pink-600 drop-shadow">
-              Welcome, Bheem!
+              Welcome, {userName}
             </h1>
             <p className="text-lg mb-8 text-pink-700 font-medium">
               Choose your class and learn with fun!

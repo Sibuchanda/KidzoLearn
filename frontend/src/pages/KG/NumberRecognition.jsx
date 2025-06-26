@@ -17,24 +17,25 @@ export default function NumberBounce() {
     utterance.rate = 0.9;
     speechSynthesis.speak(utterance);
 
-    const email = localStorage.getItem("email");
-    if (email) {
-      try {
-        const { data } = await axios.post("http://localhost:8000/task/play", {
-          email,
+     // ========== Point claim section ========-=====
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/task/play",
+        {
           activityName: "NumberRecognition",
           taskKey: number.toString(),
-        });
-
-        if (data.message === "+1 point earned!") {
-          toast.success("+1 point earned!");
-        }
-      } catch (err) {
-        console.error("Error updating points:", err);
+        },
+        { withCredentials: true }
+      );
+      if (data.message === "+1 point earned!") {
+        toast.success(data.message);
       }
+    } catch (err) {
+      console.error("Error updating points:", err);
     }
   };
 
+  
   const handlePrev = () => {
     if (currentIndex > 0) setCurrentIndex((prev) => prev - 1);
   };
@@ -67,8 +68,7 @@ export default function NumberBounce() {
             currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
-          ⬅
-          Back
+          ⬅ Back
         </button>
 
         <div
@@ -85,11 +85,12 @@ export default function NumberBounce() {
           onClick={handleNext}
           disabled={currentIndex === numbers.length - 1}
           className={`bg-green-600 hover:bg-green-400 text-white text-4xl font-bold px-6 py-2 rounded-md shadow-lg transition cursor-pointer ${
-            currentIndex === numbers.length - 1 ? "opacity-50 cursor-not-allowed" : ""
+            currentIndex === numbers.length - 1
+              ? "opacity-50 cursor-not-allowed"
+              : ""
           }`}
         >
-          Next
-          ➡
+          Next ➡
         </button>
       </div>
 

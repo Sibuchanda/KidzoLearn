@@ -8,18 +8,19 @@ export default function Progress() {
   const email = localStorage.getItem("email");
 
   useEffect(() => {
-    const fetchProgress = async () => {
-      try {
-        const { data } = await axios.get(
-          `http://localhost:8000/task/progress?email=${email}`
-        );
-        setUserProgress(data);
-      } catch (err) {
-        console.error("Error fetching progress:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+ const fetchProgress = async () => {
+  try {
+    const { data } = await axios.get(
+      "http://localhost:8000/task/progress",
+      { withCredentials: true }
+    );
+    setUserProgress(data);
+  } catch (err) {
+    console.error("Error fetching progress:", err);
+  } finally {
+    setLoading(false);
+  }
+};
     fetchProgress();
   }, [email]);
 
