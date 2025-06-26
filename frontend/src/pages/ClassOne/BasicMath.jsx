@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 
 
@@ -93,7 +95,7 @@ export default function BasicMath() {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     const next = (currentIndex + 1) % questions.length;
     setCurrentIndex(next);
     setUserAnswer("");
@@ -101,6 +103,23 @@ export default function BasicMath() {
     setIsTryAgain(false);
     setShowHint(false);
     setShowNext(false);
+
+    const email = localStorage.getItem("email");
+    const currentMath = questions[currentIndex].question;
+    if(email){
+      try{
+        const {data} = await axios.post("http://localhost:8000/task/play",{
+          email,
+          activityName: "MathPractice",
+          taskKey: currentMath,
+        });
+        if(data.message==="+1 point earned!"){
+          toast.success(data.message || "+1 point earned!");
+         }
+      }catch(err){
+         console.error("Error updating points:", err);
+      }
+    }
   };
 
   const goBack = () => {

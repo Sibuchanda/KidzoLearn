@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import axios from "axios";
 
 
 const wordsData = [
@@ -61,7 +62,6 @@ const SpellTheWord = () => {
     }
 
     if (inputLetters.join("") === correctWord) {
-      toast.success("Correct! Click NEXT to continue.");
       setIsCorrect(true);
     } else {
       toast.error("Wrong answer. Try again!");
@@ -69,7 +69,7 @@ const SpellTheWord = () => {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     const next = (currentIndex + 1) % wordsData.length;
     const nextWord = wordsData[next].word;
     const nextBlanks = generateBlankIndexes(nextWord);
@@ -80,6 +80,23 @@ const SpellTheWord = () => {
     setMessage("");
     setIsTryAgain(false);
     setIsCorrect(false);
+
+    const email = localStorage.getItem("email");
+    const currentWord = wordsData[currentIndex].word;
+    if(email){
+      try{
+        const {data} = await axios.post("http://localhost:8000/task/play",{
+          email,
+          activityName: "WordCompletion",
+          taskKey: currentWord,
+        });
+        if(data.message==="+1 point earned!"){
+          toast.success(data.message || "+1 point earned!");
+         }
+      }catch(err){
+         console.error("Error updating points:", err);
+      }
+    }
   };
 
   return (
