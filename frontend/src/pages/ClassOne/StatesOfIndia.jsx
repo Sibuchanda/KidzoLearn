@@ -85,13 +85,13 @@ const StatesOfIndia = () => {
   return (
     <div className="flex justify-center items-center p-4 relative">
 
-       {/* Back Button  */}
+      {/* Back Button */}
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => window.history.back()}
         className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <FaArrowLeft className="text-2xl" />
+      <span className="text-2xl">←</span>
       </button>
       <svg ref={svgRef}></svg>
       <div id="tooltip"></div>

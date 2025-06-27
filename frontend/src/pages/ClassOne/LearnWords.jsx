@@ -393,11 +393,11 @@ const LearnWords = () => {
     <div className="min-h-screen p-4 md:p-8 bg-gradient-to-br from-blue-50 to-purple-50 text-center">
       {/* Back Button */}
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => window.history.back()}
         className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <FaArrowLeft className="text-2xl" />
+        <span className="text-2xl">←</span>
       </button>
 
       <div className="pt-16 md:pt-8">

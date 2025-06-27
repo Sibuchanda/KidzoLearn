@@ -26,7 +26,9 @@ export default function Progress() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center"
+      style={{ backgroundImage: 'url(/images/bg2.png)' }}
+      >
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent mb-4"></div>
           <p className="text-lg text-slate-600 font-medium">Loading your progress...</p>
@@ -37,7 +39,9 @@ export default function Progress() {
 
   if (!userProgress) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center"
+      style={{ backgroundImage: 'url(/images/bg2.png)' }}
+      >
         <div className="text-center bg-white p-8 rounded-2xl shadow-lg">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Target className="w-8 h-8 text-red-500" />
@@ -54,12 +58,23 @@ export default function Progress() {
   const sectionCount = Object.keys(activityProgress).length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"
+    style={{ backgroundImage: 'url(/images/bg2.png)' }}
+    >
       {/* Header Section */}
       <div className="bg-white border-b border-slate-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-between">
-            <div>
+            {/* Back Button */}
+             <button
+                onClick={() => window.history.back()}
+                className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
+                aria-label="Go back"
+              >
+               <span className="text-2xl">←</span>
+            </button>
+
+             <div>
               <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2">
                 Welcome back, <span className="text-blue-600">{username}</span>
               </h1>
@@ -87,9 +102,6 @@ export default function Progress() {
                 {points}
               </p>
               <p className="text-lg font-semibold text-white/90 mb-2">POINTS EARNED</p>
-              <p className="text-sm text-white/70 max-w-xl mx-auto">
-                Outstanding achievement! You've earned these points through dedication and consistent learning.
-              </p>
             </div>
 
             <div className="flex justify-center space-x-6 text-center">

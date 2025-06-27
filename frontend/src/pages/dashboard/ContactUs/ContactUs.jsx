@@ -6,6 +6,15 @@ export default function ContactUs() {
       className="min-h-screen py-16 px-4 bg-cover bg-center "
       style={{ backgroundImage: 'url(/images/bg2.png)' }}
     >
+    {/* Back Button */}
+      <button
+        onClick={() => window.history.back()}
+        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
+        aria-label="Go back"
+      >
+      <span className="text-2xl">←</span>
+      </button>
+      
       <h1 className="text-4xl font-bold text-center text-blue-500 drop-shadow-lg">Contact Us</h1>
       <div className="w-24 h-2 bg-blue-500 mx-auto my-6 rounded"></div>
 

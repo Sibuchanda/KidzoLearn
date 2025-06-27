@@ -17,13 +17,13 @@ const PrepositionPlay = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-green-100 py-10 px-4 text-center">
 
-       {/* Back Button  */}
+      {/* Back Button */}
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => window.history.back()}
         className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <FaArrowLeft className="text-2xl" />
+        <span className="text-2xl">←</span>
       </button>
       <h1 className="text-4xl font-bold text-purple-800 mb-10">
         Learn Prepositions with Images
@@ -35,7 +35,7 @@ const PrepositionPlay = () => {
             {/* Image container */}
             <div className="relative w-full h-56 mb-4">
               <img
-                src={item.imgSrc} // Insert the path to your image here
+                src={item.imgSrc}
                 alt={item.label}
                 className="object-contain w-full h-full rounded-lg"
               />

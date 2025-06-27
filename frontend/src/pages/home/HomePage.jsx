@@ -13,12 +13,12 @@ export default function HomePage() {
       <div className="w-full flex justify-end px-6 pt-4 absolute top-0">
         <div className="space-x-4">
           <Link to="/signup">
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-800 transition">
+            <button className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-800 transition cursor-pointer">
               Signup
             </button>
           </Link>
           <Link to="/login">
-            <button className="border border-blue-600 text-blue-600 px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-600 hover:text-white transition">
+            <button className="border border-blue-600 text-blue-600 px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-600 hover:text-white transition cursor-pointer">
               Signin
             </button>
           </Link>
@@ -119,7 +119,7 @@ export default function HomePage() {
       <footer className="w-full text-gray-800 py-6 mt-10 backdrop-blur-md">
         <div className="w-full px-4 flex flex-col md:flex-row justify-between items-center">
           <div className="text-center md:text-left mb-4 md:mb-0">
-            <h2 className="text-xl font-bold">KiddoSchool</h2>
+            <h2 className="text-xl font-bold">KidzoSchool</h2>
             <p className="text-sm mt-1">
               © {new Date().getFullYear()} KidzoSchool. All rights reserved.
             </p>

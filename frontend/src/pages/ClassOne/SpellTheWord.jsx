@@ -104,13 +104,13 @@ const SpellTheWord = () => {
   return (
     <div className="min-h-screen bg-gradient-to-tr from-purple-200 to-blue-100 p-8 flex flex-col items-center justify-center text-center font-sans">
 
-       {/* Back Button  */}
+      {/* Back Button */}
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => window.history.back()}
         className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <FaArrowLeft className="text-2xl" />
+        <span className="text-2xl">←</span>
       </button>
       <h1 className="text-4xl font-extrabold text-blue-800 mb-16 drop-shadow-md">Spell the Word</h1>
 

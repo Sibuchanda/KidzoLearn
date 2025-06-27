@@ -45,15 +45,14 @@ const AnimalSoundFlashcards = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 to-pink-100 p-6">
-      {/* Back to KG Activities */}
+      {/* Back Button */}
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => window.history.back()}
         className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <FaArrowLeft className="text-2xl" />
+        <span className="text-2xl">←</span>
       </button>
-
       <h1 className="text-4xl text-center font-bold text-pink-600 mb-10">
         Tap an Animal to Hear Its Sound!
       </h1>

@@ -8,8 +8,6 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setconfirmPassword] = useState("");
-
-  // After Signup it will automatically redirect to Login page
   const navigateTo = useNavigate();
 
   const handleRegister = async (e) => {
@@ -50,7 +48,10 @@ function Signup() {
 
   return (
     <div>
-      <div className="flex h-screen items-center justify-center border-r-gray-100">
+      <div 
+        className="flex h-screen items-center justify-center border-r-gray-100 bg-cover bg-center"
+        style={{ backgroundImage: 'url(/images/bg2.png)' }}
+      >
         <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
           <h2 className="text-3xl font-semibold text-center mb-5 text-blue-800">
             Signup

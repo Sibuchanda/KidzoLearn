@@ -122,7 +122,7 @@ export const getProfile = async (req, res) => {
 export const logout = async (req, res) => {
   res.clearCookie("jwt", {
     httpOnly: true,
-    secure: false, 
+    secure: false,  
     sameSite: "lax",
     path: "/"
   });

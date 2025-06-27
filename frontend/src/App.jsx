@@ -6,9 +6,9 @@ import Login from "./auth/login";
 import Dashboard from "./pages/dashboard/Dashboard";
 import KGActivities from "./pages/KG/KgActivities";
 import ColorRecognition from "./pages/KG/ColorRecognition";
-import NumberRecognition from './pages/KG/NumberRecognition';
-import AlphabetRecognition from './pages/KG/AlphabetRecognition'
-import AnimalSounds from './pages/KG/AnimalSounds'
+import NumberRecognition from "./pages/KG/NumberRecognition";
+import AlphabetRecognition from "./pages/KG/AlphabetRecognition";
+import AnimalSounds from "./pages/KG/AnimalSounds";
 
 import ClassOneActivities from "./pages/ClassOne/ClassOneActivities";
 import LearnWords from "./pages/ClassOne/LearnWords";
@@ -24,9 +24,6 @@ import PrivateRoute from "./authenticate/PrivateRoute";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-
-
 
 function App() {
   const router = createBrowserRouter([
@@ -44,73 +41,124 @@ function App() {
     },
     {
       path: "/dashboard",
-      element:(
-          <PrivateRoute>
-            <Dashboard />
-          </PrivateRoute>
-      )
+      element: (
+        <PrivateRoute>
+          <Dashboard />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/KGActivities",
-      element: <KGActivities />,
+      element: (
+        <PrivateRoute>
+          <KGActivities />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/ColorRecognition",
-      element: <ColorRecognition />,
+      element: (
+        <PrivateRoute>
+          <ColorRecognition />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/NumberRecognition",
-      element: <NumberRecognition />,
+      element: (
+        <PrivateRoute>
+          <NumberRecognition />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/AlphabetRecognition",
-      element: <AlphabetRecognition />,
+      element: (
+        <PrivateRoute>
+          <AlphabetRecognition />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/AnimalSounds",
-      element: <AnimalSounds />,
+      element: (
+        <PrivateRoute>
+          <AnimalSounds />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/LearnWords",
-      element: <LearnWords />,
+      element: (
+        <PrivateRoute>
+          <LearnWords />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/ClassOneActivities",
-      element: <ClassOneActivities />,
+      element: (
+        <PrivateRoute>
+          <ClassOneActivities />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/SpellTheWord",
-      element: <SpellTheWord />,
+      element: (
+        <PrivateRoute>
+          <SpellTheWord />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/BasicMath",
-      element: <BasicMath />,
+      element: (
+        <PrivateRoute>
+          <BasicMath />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/PrepositionPlay",
-      element: <PrepositionPlay />,
+      element: (
+        <PrivateRoute>
+          <PrepositionPlay />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/StatesOfIndia",
-      element: <StatesOfIndia />,
+      element: (
+        <PrivateRoute>
+          <StatesOfIndia />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/ContactUs",
-      element: <ContactUs />,
+      element: (
+        <PrivateRoute>
+          <ContactUs />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/progress",
-      element: <Progress />,
+      element: (
+        <PrivateRoute>
+          <Progress />
+        </PrivateRoute>
+      ),
     },
-  
   ]);
 
- return (
-  <div className="h-full">
-    <ToastContainer position="top-right" />
-    <RouterProvider router={router} />
-  </div>
-);
+  return (
+    <div className="h-full">
+      <ToastContainer position="top-right" />
+      <RouterProvider router={router} />
+    </div>
+  );
 }
 
 export default App;

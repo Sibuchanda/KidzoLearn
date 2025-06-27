@@ -19,21 +19,20 @@ Welcome to **KidzoSchool**, an interactive learning app specially designed for *
 - Mobile-responsive layout for use on tablets, phones, and desktops
 - Clean, kid-friendly user interface with easy navigation
 
-> N:B, Some of our features are not implemented initially, it will be added after future updates.
-
 ## Step-by-Step Guide to Use KidzoLearn
 ## 1. Open the Application
 
 When you open **KidzoSchool** in your browser, you will see the **Homepage** with a **Get Started** button.
 
 - Click the **“Get Started”** button to begin.
-
+- After clicking **“Get Started”** there will be SignUp page. So first signup.
 
 ## 2. Class Selection
-After clicking **Get Started**, you will reach the **Dashboard**.
+After clicking **Signed up**, you will reach the **Dashboard**.
 
 - Here you can choose the class:  
    #### KG (Kindergarten)  
+   #### Class 1
 
 ## 3. KG Activities Section
 - After selecting **KG**, you will enter the **KG Activities** screen with 4 colorful learning cards:
@@ -43,7 +42,7 @@ After clicking **Get Started**, you will reach the **Dashboard**.
 3. Alphabet Identification  
 4. Animal Sound Game
 
-Tap on any card to begin that activity.
+Tap on any card to begin that activity.The Childreen will get +1 point for learning any task first time.
 
 
 ####  KG Activities Explained
@@ -54,10 +53,26 @@ Tap on any card to begin that activity.
 
 ### Similarly, for Class 1, you have follow the abov method
 
+## 3. KG Progress Section
+You can find the Progress section on the Dashboard. The first time you visit, your progress points will be 0. As you complete learning activities, your points will increase. In the Progress section, you will see
+
+  - Total points earned
+  - Categories of points — which learning category and task gave you those points
+
+
+
+## 3. Profile Section
+The Profile section is in the top-right corner of the Dashboard. It shows a round icon with the first letter of your username. When you click it, a pop-up will appear showing
+  - Your username
+  - Your email
+  - A Logout option
+
 ## Contact us
 Having trouble or any issue?
 
 - Email us at: **sibuchanda457@gmail.com**
+
+Or we can contact through **Contact us** section present in **Dashboard**
 
 ---
 

@@ -46,13 +46,13 @@ export default function NumberBounce() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-200 p-6 flex flex-col items-center justify-center relative overflow-hidden">
-      {/* Back to KG Activities */}
+      {/* Back Button */}
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => window.history.back()}
         className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <FaArrowLeft className="text-2xl" />
+        <span className="text-2xl">←</span>
       </button>
 
       <h1 className="text-4xl sm:text-5xl font-bold text-blue-700 mb-20 drop-shadow">

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';  // Removed useNavigate
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from "react-toastify";
+
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -16,17 +17,13 @@ function Login() {
         { withCredentials: true, headers: { 'Content-Type': 'application/json' } }
       );
 
-      // Check if the token exists in the response
-      if (data.user && data.user.token) {
+      if (data.user) {
         localStorage.setItem('username',data.user.username);
         toast.success(data.message || "User Login successfully");
-
-        // Force a page reload to ensure the token is available globally
-        window.location.href = "/dashboard";  // This reloads the app and resolves the first-time issue
+        window.location.href = "/dashboard";
       } else {
         throw new Error("Token not found in response");
       }
-
       setEmail("");
       setPassword("");
     } catch (err) {
@@ -37,7 +34,9 @@ function Login() {
 
   return (
     <div>
-      <div className='flex h-screen items-center justify-center border-r-gray-100'>
+      <div className='flex h-screen items-center justify-center border-r-gray-100 bg-cover bg-center'
+       style={{ backgroundImage: 'url(/images/bg2.png)' }}
+      >
         <div className='w-full max-w-md p-8 bg-white rounded-lg shadow-lg'>
           <h2 className='text-2xl font-semibold text-center mb-5 text-blue-800'>Login</h2>
           <form onSubmit={handleRegister}>

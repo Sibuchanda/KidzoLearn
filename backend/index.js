@@ -13,8 +13,6 @@ const PORT = process.env.PORT || 8000;
 // const DB_URI="mongodb+srv://sibuchanda457:fanCgDryz1wEgaqh@cluster0.nq9wq9f.mongodb.net/kidzo_school"
 const DB_URI="mongodb://127.0.0.1:27017/kidzo_school";
 
-
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
@@ -31,9 +29,6 @@ try {
 } catch (err) {
     console.log(err);
 }
-
-
-
 
 app.use("/user",userRoute);
 app.use("/task",taskRoute);
