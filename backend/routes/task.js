@@ -4,7 +4,6 @@ import { authenticate } from '../middleware/authorize.js';
 
 const router = express.Router();
 
-
 router.post('/play', authenticate, completeTask);
 router.get('/progress', authenticate, getUserProgress);
 

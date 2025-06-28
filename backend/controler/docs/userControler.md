@@ -13,7 +13,7 @@ Validates inputs using Zod and then Checks if the email is already registered or
 
 
 ## login(req, res)
-Validates input fields and Checks if user exists and password matches. Generates JWT token and stores it in a cookie and then Returns username and token.
+Validates input fields and Checks if user exists and password matches. Generates JWT token and stores it in a cookie and also in logged in user's database schema. And then Returns username and token.
 
 - Parameters:
   - `req`: Express request object (expects `email`, `password` in body)

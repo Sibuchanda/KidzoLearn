@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
   },
   activityProgress: {
     type: Map,
-    of: [String], // activityName: ["taskKey1", "taskKey2"]
+    of: [String], // Example : "ColorIdentification": ["red", "blue"]
     default: {},
   }
 });

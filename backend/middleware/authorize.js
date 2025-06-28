@@ -3,7 +3,6 @@ import User from '../model/userModel.js'
 
 export const authenticate = async (req, res, next) => {
   const token = req.cookies.jwt;
-
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized, no token found' });
   }

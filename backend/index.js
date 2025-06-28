@@ -1,10 +1,11 @@
 import express from "express";
 import dotenv from 'dotenv';
-import mongoose from "mongoose";
 import cors from 'cors'
 import cookieParser from "cookie-parser";
 import userRoute from './routes/user.js';
 import taskRoute from './routes/task.js';
+
+import connectDB from "./model/connect.js";
 
 const app = express();
 
@@ -21,14 +22,8 @@ app.use(cors({
     methods:"GET,POST,PUT,DELETE",
     allowedHeaders: ["Content-Type", "Authorization"]
 }))
-
 //--------- Database connection ---------
-try {
-    await mongoose.connect(DB_URI)
-    console.log("Successfully connected to MongoDB...!");
-} catch (err) {
-    console.log(err);
-}
+connectDB(DB_URI);
 
 app.use("/user",userRoute);
 app.use("/task",taskRoute);

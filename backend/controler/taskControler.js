@@ -1,7 +1,7 @@
 import User from '../model/userModel.js';
 
 
-// routes/task.js or controller
+// ======== Claim points when a task complete first time ========
 export const completeTask = async (req, res) => {
   try {
     const { activityName, taskKey } = req.body;
@@ -9,9 +9,7 @@ export const completeTask = async (req, res) => {
     if (!activityName || !taskKey) {
       return res.status(400).json({ message: "Missing required fields" });
     }
-
-    const user = req.user; // comes from middleware
-
+    const user = req.user;
     if (!user.activityProgress) {
       user.activityProgress = new Map();
     }
@@ -42,8 +40,7 @@ export const completeTask = async (req, res) => {
 };
 
 
-
-
+// =========== Returns Users Progress ==========
 export const getUserProgress = async (req, res) => {
   try {
     const user = req.user; 
