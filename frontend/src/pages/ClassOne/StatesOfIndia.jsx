@@ -18,7 +18,6 @@ const stateColors = {
 };
 
 const StatesOfIndia = () => {
-  const navigate = useNavigate();
   const svgRef = useRef();
 
   useEffect(() => {
@@ -41,12 +40,15 @@ const StatesOfIndia = () => {
         const states = topojson.feature(indiaData, indiaData.objects.india).features;
 
         svg
-          .attr("width", width)
-          .attr("height", height)
+          .attr("viewBox", `0 0 ${width} ${height}`)
+          .attr("preserveAspectRatio", "xMidYMid meet")
+          .style("width", "100%")
+          .style("height", "auto")
           .style("background", "#f0f8ff")
-          .style("position", "relative");
+          .style("border-radius", "12px")
+          .style("overflow", "visible");
 
-        // Tooltip container
+        // Tooltip
         const tooltip = d3
           .select("#tooltip")
           .style("position", "absolute")
@@ -73,6 +75,7 @@ const StatesOfIndia = () => {
               .style("left", `${event.clientX + 10}px`)
               .html(`<strong>${d.properties.name}</strong>`)
               .style("visibility", "visible");
+
             d3.select(this).attr("fill", "orange");
           })
           .on("mouseleave", function (event, d) {
@@ -83,17 +86,23 @@ const StatesOfIndia = () => {
   }, []);
 
   return (
-    <div className="flex justify-center items-center p-4 relative">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-green-100 px-4 pt-24 pb-10 sm:pt-20 flex flex-col items-center justify-center relative">
 
       {/* Back Button */}
       <button
         onClick={() => window.history.back()}
-        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
+        className="absolute top-4 left-4 bg-blue-700 hover:bg-blue-500 text-white text-base sm:text-xl px-4 py-3 sm:px-8 sm:py-6 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-      <span className="text-2xl">←</span>
+        ←
       </button>
-      <svg ref={svgRef}></svg>
+
+      {/* Responsive SVG */}
+      <div className="w-full max-w-6xl">
+        <svg ref={svgRef}></svg>
+      </div>
+
+      {/* Tooltip */}
       <div id="tooltip"></div>
     </div>
   );

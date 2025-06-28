@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { FaArrowLeft, FaVolumeUp } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { FaVolumeUp } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const numbers = Array.from({ length: 10 }, (_, i) => i);
 
 export default function NumberBounce() {
-  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentNumber = numbers[currentIndex];
 
@@ -17,7 +15,6 @@ export default function NumberBounce() {
     utterance.rate = 0.9;
     speechSynthesis.speak(utterance);
 
-     // ========== Point claim section ========-=====
     try {
       const { data } = await axios.post(
         "http://localhost:8000/task/play",
@@ -35,7 +32,6 @@ export default function NumberBounce() {
     }
   };
 
-  
   const handlePrev = () => {
     if (currentIndex > 0) setCurrentIndex((prev) => prev - 1);
   };
@@ -45,46 +41,50 @@ export default function NumberBounce() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-200 p-6 flex flex-col items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-200 p-4 sm:p-6 flex flex-col items-center justify-center relative overflow-hidden">
       {/* Back Button */}
       <button
         onClick={() => window.history.back()}
-        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
+        className="absolute top-2 left-2 sm:top-6 sm:left-6 bg-blue-700 hover:bg-blue-500 text-white px-4 py-3 sm:px-7 sm:py-6 text-base sm:text-xl rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <span className="text-2xl">←</span>
+        ←
       </button>
 
-      <h1 className="text-4xl sm:text-5xl font-bold text-blue-700 mb-20 drop-shadow">
+      {/* Heading */}
+      <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-blue-700 mt-14 sm:mt-0 mb-10 text-center px-2 drop-shadow">
         Tap the Number to Hear It!
       </h1>
 
       {/* Number Navigation */}
-      <div className="flex items-center gap-18 mb-8">
+      <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-10 mb-10 w-full justify-center px-4">
+        {/* Previous Button */}
         <button
           onClick={handlePrev}
           disabled={currentIndex === 0}
-          className={`bg-green-600 hover:bg-green-400 text-white text-4xl font-bold px-5 py-2 rounded-md shadow-lg transition cursor-pointer${
+          className={`bg-green-600 hover:bg-green-400 text-white text-xl sm:text-3xl font-bold px-6 py-2 rounded-md shadow-lg transition cursor-pointer ${
             currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
           ⬅ Back
         </button>
 
+        {/* Number Display */}
         <div
           onClick={() => speakNumber(currentNumber)}
-          className="cursor-pointer text-[8rem] sm:text-[12rem] font-extrabold text-center text-white drop-shadow-lg hover:scale-105 transition-transform duration-300 rounded-xl px-40 bg-blue-500 shadow-xl"
+          className="cursor-pointer text-[6rem] sm:text-[8rem] md:text-[10rem] font-extrabold text-center text-white drop-shadow-lg hover:scale-105 transition-transform duration-300 rounded-xl px-10 sm:px-20 bg-blue-500 shadow-xl flex items-center justify-center"
         >
           {currentNumber}
-          <span className="ml-4 text-2xl align-middle">
+          <span className="ml-3 text-2xl sm:text-3xl align-middle">
             <FaVolumeUp />
           </span>
         </div>
 
+        {/* Next Button */}
         <button
           onClick={handleNext}
           disabled={currentIndex === numbers.length - 1}
-          className={`bg-green-600 hover:bg-green-400 text-white text-4xl font-bold px-6 py-2 rounded-md shadow-lg transition cursor-pointer ${
+          className={`bg-green-600 hover:bg-green-400 text-white text-xl sm:text-3xl font-bold px-6 py-2 rounded-md shadow-lg transition cursor-pointer${
             currentIndex === numbers.length - 1
               ? "opacity-50 cursor-not-allowed"
               : ""
@@ -94,8 +94,8 @@ export default function NumberBounce() {
         </button>
       </div>
 
-      {/* Apple emojis */}
-      <div className="text-6xl mt-4 text-red-600 flex flex-wrap justify-center gap-2 max-w-[80vw]">
+      {/* Apple Emojis */}
+      <div className="text-4xl sm:text-6xl text-red-600 flex flex-wrap justify-center gap-2 max-w-[90vw] px-2">
         {Array.from({ length: currentNumber }, (_, i) => (
           <span key={i}>🍎</span>
         ))}

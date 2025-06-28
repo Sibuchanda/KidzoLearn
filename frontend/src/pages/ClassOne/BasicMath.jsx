@@ -26,9 +26,7 @@ export default function BasicMath() {
   const [showNext, setShowNext] = useState(false);
 
   const currentQ = questions[currentIndex];
-  const navigate = useNavigate();
 
-  // Extracting numbers from the question for apple visualization
   const extractNumbers = (question) => {
     const numbers = question.match(/\d+/g);
     return numbers ? numbers.map((num) => parseInt(num)) : [];
@@ -36,12 +34,8 @@ export default function BasicMath() {
 
   const renderApples = (count) => {
     if (count > 10) {
-      // For numbers > 10, show in groups of 10
       const groups = Math.floor(count / 10);
       const remainder = count % 10;
-      const groupApples = "🍎".repeat(10);
-      const remainderApples = "🍎".repeat(remainder);
-
       return (
         <div className="flex flex-wrap justify-center gap-2">
           {Array(groups)
@@ -52,21 +46,24 @@ export default function BasicMath() {
                 className="border-2 border-dashed border-green-300 rounded-lg p-2"
               >
                 <div className="text-xs text-green-600 mb-1">Group of 10</div>
-                <div className="text-2xl leading-none">{groupApples}</div>
+                <div className="text-2xl leading-none">{"🍎".repeat(10)}</div>
               </div>
             ))}
           {remainder > 0 && (
             <div className="border-2 border-dashed border-orange-300 rounded-lg p-2">
               <div className="text-xs text-orange-600 mb-1">Remainder</div>
-              <div className="text-2xl leading-none">{remainderApples}</div>
+              <div className="text-2xl leading-none">
+                {"🍎".repeat(remainder)}
+              </div>
             </div>
           )}
         </div>
       );
     } else {
-      // For numbers <= 10, show normally
       return (
-        <div className="text-3xl leading-relaxed">{"🍎".repeat(count)}</div>
+        <div className="text-2xl md:text-3xl leading-relaxed text-center">
+          {"🍎".repeat(count)}
+        </div>
       );
     }
   };
@@ -103,8 +100,6 @@ export default function BasicMath() {
     setShowHint(false);
     setShowNext(false);
 
-
-     // ========== Point claim section ========-=====
     const currentMath = questions[currentIndex].question;
     try {
       const { data } = await axios.post(
@@ -121,34 +116,31 @@ export default function BasicMath() {
     } catch (err) {
       console.error("Error updating points:", err);
     }
-};
-
-  const goBack = () => {
-    console.log("Going back...");
   };
 
   const numbers = extractNumbers(currentQ.question);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-yellow-100 p-4 flex flex-col items-center justify-center">
-        {/* Back Button */}
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-yellow-100 px-4 pt-24 pb-6 sm:px-6 sm:pt-20 sm:pb-10 flex flex-col items-center justify-center relative">
+
+      {/* Back Button */}
       <button
         onClick={() => window.history.back()}
-        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
+        className="absolute top-4 left-4 bg-blue-700 hover:bg-blue-500 text-white text-base sm:text-xl px-4 py-3 sm:px-8 sm:py-6 rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <span className="text-2xl">←</span>
+        ←
       </button>
 
       <div className="w-full max-w-4xl">
-        <h1 className="text-4xl md:text-5xl font-bold text-purple-700 mb-8 text-center">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-purple-700 mb-8 text-center">
           Math Practice with Apples
         </h1>
 
-        <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-10">
+        <div className="bg-white rounded-3xl shadow-2xl p-4 sm:p-6 md:p-10">
           {/* Question Section */}
           <div className="text-center mb-8">
-            <p className="text-3xl md:text-4xl font-bold mb-6 flex items-center justify-center gap-3 flex-wrap">
+            <p className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 flex items-center justify-center gap-3 flex-wrap">
               <span>
                 {currentQ.question.replace(/\d+/g, (match) => `${match}`)}
               </span>
@@ -156,35 +148,33 @@ export default function BasicMath() {
                 type="text"
                 value={userAnswer}
                 onChange={(e) => setUserAnswer(e.target.value)}
-                className="w-20 h-16 text-3xl text-center border-b-4 border-purple-500 focus:outline-none focus:border-purple-700 bg-purple-50 rounded-t-lg"
+                className="w-16 sm:w-20 h-12 sm:h-16 text-2xl sm:text-3xl text-center border-b-4 border-purple-500 focus:outline-none bg-purple-50 rounded-t-lg"
                 disabled={showNext}
                 placeholder="?"
               />
             </p>
           </div>
 
-          {/* Apple Visualization Section */}
+          {/* Apple Visuals */}
           <div className="mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {numbers.map((number, index) => (
                 <div
                   key={index}
                   className="bg-gradient-to-br from-green-50 to-yellow-50 rounded-xl p-4 border-2 border-green-200"
                 >
-                  <div className="text-center mb-3">
-                    <span className="text-2xl font-bold text-green-700">
+                  <div className="text-center mb-2">
+                    <span className="text-xl font-bold text-green-700">
                       Number: {number}
                     </span>
                   </div>
-                  <div className="flex justify-center">
-                    {renderApples(number)}
-                  </div>
+                  <div className="flex justify-center">{renderApples(number)}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Buttons Section */}
+          {/* Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mb-6">
             <button
               onClick={handleSubmit}
@@ -192,7 +182,7 @@ export default function BasicMath() {
                 isTryAgain
                   ? "bg-red-500 hover:bg-red-600"
                   : "bg-green-500 hover:bg-green-600"
-              } text-white px-8 py-3 rounded-xl text-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg`}
+              } text-white px-6 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold transition-all transform hover:scale-105 shadow-lg cursor-pointer`}
             >
               {isTryAgain ? "Try Again" : "Submit"}
             </button>
@@ -200,7 +190,7 @@ export default function BasicMath() {
             {showNext && (
               <button
                 onClick={handleNext}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-xl text-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg"
+                className="bg-blue-500 hover:bg-blue-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-xl text-base sm:text-lg font-semibold transition-all transform hover:scale-105 shadow-lg cursor-pointer"
               >
                 Next
               </button>
@@ -208,13 +198,13 @@ export default function BasicMath() {
 
             <button
               onClick={() => setShowHint(!showHint)}
-              className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-xl text-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg"
+              className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-xl text-base sm:text-lg font-semibold transition-all transform hover:scale-105 shadow-lg cursor-pointer"
             >
               {showHint ? "Hide Hint" : "Show Hint"}
             </button>
           </div>
 
-          {/* Message and Hint Section */}
+          {/* Feedback Message */}
           {message && (
             <div
               className={`text-center p-4 rounded-xl mb-4 ${
@@ -225,13 +215,14 @@ export default function BasicMath() {
                   : "bg-blue-100 text-blue-800 border-2 border-blue-300"
               }`}
             >
-              <p className="text-xl font-semibold">{message}</p>
+              <p className="text-lg sm:text-xl font-semibold">{message}</p>
             </div>
           )}
 
+          {/* Hint Box */}
           {showHint && (
             <div className="bg-gradient-to-r from-pink-100 to-purple-100 p-4 rounded-xl border-2 border-pink-300">
-              <div className="text-center text-lg md:text-xl text-pink-700 font-semibold">
+              <div className="text-center text-base sm:text-lg md:text-xl text-pink-700 font-semibold">
                 Hint: {currentQ.hintExplanation}
               </div>
             </div>

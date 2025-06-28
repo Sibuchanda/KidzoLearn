@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { FaVolumeUp, FaArrowLeft } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { FaVolumeUp } from "react-icons/fa";
 import { toast } from "react-toastify";
 import axios from "axios";
 
@@ -19,19 +18,17 @@ const animals = [
 
 const AnimalSoundFlashcards = () => {
   const [audio] = useState(new Audio());
-  const navigate = useNavigate();
 
-  const playSound = async (soundFile, animaleName) => {
+  const playSound = async (soundFile, animalName) => {
     audio.src = `/animalSound/${soundFile}`;
     audio.play();
 
-    // ========== Point claim section ========-=====
     try {
       const { data } = await axios.post(
         "http://localhost:8000/task/play",
         {
           activityName: "AnimalRecognition",
-          taskKey: animaleName,
+          taskKey: animalName,
         },
         { withCredentials: true }
       );
@@ -44,20 +41,23 @@ const AnimalSoundFlashcards = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-100 to-pink-100 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-100 to-pink-100 p-4 sm:p-6 relative">
       {/* Back Button */}
       <button
         onClick={() => window.history.back()}
-        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
+        className="absolute top-2 left-2 sm:top-6 sm:left-6 bg-blue-700 hover:bg-blue-500 text-white px-4 py-3 sm:px-6 sm:py-6 text-base sm:text-xl rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <span className="text-2xl">←</span>
+        ←
       </button>
-      <h1 className="text-4xl text-center font-bold text-pink-600 mb-10">
+
+      {/* Heading */}
+      <h1 className="text-2xl sm:text-4xl font-bold text-center text-pink-600 mt-16 sm:mt-0 mb-10 px-2 drop-shadow">
         Tap an Animal to Hear Its Sound!
       </h1>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      {/* Animal Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto px-2 sm:px-4">
         {animals.map((animal) => (
           <div
             key={animal.name}
@@ -67,12 +67,12 @@ const AnimalSoundFlashcards = () => {
             <img
               src={`/animalImage/${animal.image}`}
               alt={animal.name}
-              className="w-full h-70 object-contain mb-3 drop-shadow-lg bg-white rounded-xl p-2"
+              className="w-full h-32 sm:h-40 md:h-56 object-contain mb-3 drop-shadow-lg bg-white rounded-xl p-2"
             />
-            <div className="text-lg font-semibold text-pink-600">
+            <div className="text-base sm:text-lg font-semibold text-pink-600">
               {animal.name}
             </div>
-            <FaVolumeUp className="text-pink-500 text-xl mt-1 mx-auto" />
+            <FaVolumeUp className="text-pink-500 text-lg sm:text-xl mt-1 mx-auto" />
           </div>
         ))}
       </div>

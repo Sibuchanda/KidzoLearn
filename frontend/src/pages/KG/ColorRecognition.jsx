@@ -1,70 +1,70 @@
-import { useState } from 'react';
+import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const colors = [
-  { name: 'Red', hex: '#EF4444' },
-  { name: 'Blue', hex: '#3B82F6' },
-  { name: 'Green', hex: '#10B981' },
-  { name: 'Yellow', hex: '#FACC15' },
-  { name: 'Purple', hex: '#A855F7' },
-  { name: 'Orange', hex: '#FB923C' },
-  { name: 'Pink', hex: '#EC4899' },
-  { name: 'Violet', hex: '#7F00FF' },
-  { name: 'Black', hex: '#000000' },
+  { name: "Red", hex: "#EF4444" },
+  { name: "Blue", hex: "#3B82F6" },
+  { name: "Green", hex: "#10B981" },
+  { name: "Yellow", hex: "#FACC15" },
+  { name: "Purple", hex: "#A855F7" },
+  { name: "Orange", hex: "#FB923C" },
+  { name: "Pink", hex: "#EC4899" },
+  { name: "Violet", hex: "#7F00FF" },
+  { name: "Black", hex: "#000000" },
 ];
 
 export default function ColorRecognition() {
-  const [backgroundColor, setBackgroundColor] = useState('#FEFCE8');
+  const [backgroundColor, setBackgroundColor] = useState("#FEFCE8");
 
- const speakColor = async (colorName, hex) => {
-  setBackgroundColor(hex);
+  const speakColor = async (colorName, hex) => {
+    setBackgroundColor(hex);
 
-  const utterance = new SpeechSynthesisUtterance(colorName);
-  utterance.pitch = 1.3;
-  utterance.rate = 0.9;
-  speechSynthesis.speak(utterance);
+    const utterance = new SpeechSynthesisUtterance(colorName);
+    utterance.pitch = 1.3;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
 
-   // ========== Point claim section ========-=====
     try {
-    const { data } = await axios.post(
-      "http://localhost:8000/task/play",
-      {
-        activityName: "ColorRecognition",
-        taskKey: colorName,
-      },
-      { withCredentials: true }
-    );
-    if (data.message === "+1 point earned!") {
-      toast.success(data.message);
+      const { data } = await axios.post(
+        "http://localhost:8000/task/play",
+        {
+          activityName: "ColorRecognition",
+          taskKey: colorName,
+        },
+        { withCredentials: true }
+      );
+      if (data.message === "+1 point earned!") {
+        toast.success(data.message);
+      }
+    } catch (err) {
+      console.error("Error updating points:", err);
     }
-  } catch (err) {
-    console.error("Error updating points:", err);
-  }
-};
-
+  };
 
   return (
     <div
-      className="min-h-screen transition-colors duration-300 p-6 sm:p-10 flex flex-col items-center justify-center"
+      className="min-h-screen transition-colors duration-300 p-4 sm:p-10 flex flex-col items-center justify-center"
       style={{ backgroundColor: backgroundColor }}
     >
-      {/* Back Button */}
-      <button
-        onClick={() => window.history.back()}
-        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
-        aria-label="Go back"
-      >
-        <span className="text-2xl">←</span>
-      </button>
+      <div className="w-full relative mb-10">
+        {/* Back Button */}
+        <button
+          onClick={() => window.history.back()}
+          className="absolute top-2 left-2 bg-blue-700 hover:bg-blue-500 text-white px-4 py-3 sm:px-6 sm:py-6 sm:px-7 text-base sm:text-2xl rounded-md shadow-md z-10 cursor-pointer"
+          aria-label="Go back"
+        >
+          ←
+        </button>
 
-      {/* Title */}
-      <h1 className="text-4xl sm:text-5xl font-bold text-center text-white drop-shadow-lg mb-10">
-        Tap the Colors to Hear Them!
-      </h1>
+        {/* Title */}
+        <h1 className="text-2xl sm:text-4xl font-bold text-center text-white drop-shadow-lg mt-14 sm:mt-0">
+          Tap the Colors to Hear Them!
+        </h1>
+      </div>
 
-      {/* Color Grid - Responsive Layout */}
-      <div className="w-full max-w-4xl mx-auto px-4">
+      {/* Color Grid */}
+      <div className="w-full max-w-4xl mx-auto px-2 sm:px-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 place-items-center">
           {colors.map((color, index) => (
             <button

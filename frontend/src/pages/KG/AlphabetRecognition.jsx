@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { FaVolumeUp, FaArrowLeft } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { FaVolumeUp } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const alphabetData = {
   A: { word: "Apple", emoji: "🍎" },
@@ -44,7 +44,6 @@ export default function AlphabetObjectGame() {
     speechSynthesis.cancel();
     speechSynthesis.speak(utterance);
 
-    // ------ Point claim section -----
     try {
       const { data } = await axios.post(
         "http://localhost:8000/task/play",
@@ -63,21 +62,23 @@ export default function AlphabetObjectGame() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-100 to-pink-100 p-6 relative">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-100 to-pink-100 p-4 sm:p-6 relative">
       {/* Back Button */}
       <button
         onClick={() => window.history.back()}
-        className="absolute top-6 left-6 text-white bg-blue-700 hover:bg-blue-500 p-6 rounded-md shadow-md z-10 cursor-pointer"
+        className="absolute top-4 left-4 sm:top-6 sm:left-6 text-white bg-blue-700 hover:bg-blue-500 px-4 py-3 sm:px-8 sm:py-6 text-base sm:text-xl rounded-md shadow-md z-10 cursor-pointer"
         aria-label="Go back"
       >
-        <span className="text-2xl">←</span>
+        ←
       </button>
 
-      <h1 className="text-4xl text-center font-bold text-pink-600 mb-10">
+      {/* Heading */}
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-pink-600 mb-8 mt-20 sm:mt-10">
         Tap a Letter to Learn!
       </h1>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      {/* Grid */}
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
         {Object.entries(alphabetData).map(([letter, data]) => (
           <div
             key={letter}
@@ -85,7 +86,7 @@ export default function AlphabetObjectGame() {
               setSelected({ letter, ...data });
               speak(letter, data.word);
             }}
-            className="cursor-pointer bg-blue-500 text-white font-extrabold text-8xl rounded-2xl shadow-lg hover:scale-105 transition transform py-20 text-center hover:bg-blue-800"
+            className="cursor-pointer bg-blue-500 text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl rounded-2xl shadow-md hover:scale-105 transition-transform py-10 sm:py-14 text-center hover:bg-blue-800 font-extrabold"
           >
             {letter}
           </div>
@@ -95,21 +96,21 @@ export default function AlphabetObjectGame() {
       {/* Modal */}
       {selected && (
         <div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-20"
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-20 p-4"
           onClick={() => setSelected(null)}
         >
-          <div className="bg-white p-25 rounded-xl shadow-xl text-center max-w-sm">
-            <div className="text-9xl">{selected.emoji}</div>
-            <h2 className="text-6xl font-bold mt-4 text-pink-700">
+          <div
+            className="bg-white w-full max-w-sm p-6 sm:p-8 rounded-xl shadow-xl text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="text-6xl sm:text-8xl mb-2">{selected.emoji}</div>
+            <h2 className="text-4xl sm:text-5xl font-bold text-pink-700 mt-2">
               {selected.letter}
             </h2>
-            <p className="text-2xl mt-2">{selected.word}</p>
+            <p className="text-xl sm:text-2xl mt-2">{selected.word}</p>
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                speak(selected.letter, selected.word);
-              }}
-              className="mt-4 bg-pink-500 text-white px-4 py-2 rounded-full shadow hover:bg-pink-600 transition"
+              onClick={() => speak(selected.letter, selected.word)}
+              className="mt-4 bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-full shadow transition text-sm sm:text-base"
             >
               <FaVolumeUp className="inline mr-2" />
               Hear Again
