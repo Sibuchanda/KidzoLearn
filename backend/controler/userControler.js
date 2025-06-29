@@ -34,7 +34,7 @@ export const signup = async (req, res) => {
     const confirmpassword = req.body.confirmpassword;
 
     if (!username || !email || !password) {
-      res.status(400).json({ errors: "All fields are required" });
+      return res.status(400).json({ errors: ["All fields are required"] });
     }
     if (password === confirmpassword) {
       // safe parsing the userSchema using 'Zod
@@ -50,25 +50,25 @@ export const signup = async (req, res) => {
       }
       const user = await User.findOne({ email });
       if (user) {
-        return res.status(400).json({ errors: "User already registered" });
+        return res.status(400).json({ errors: ["User already registered"] });
       }
       const hashPassword = await bcrypt.hash(password, 10);
       const newUser = new User({ username, email, password: hashPassword });
       await newUser.save();
 
       if (newUser) {
-        res
+        return res
           .status(201)
           .json({ message: "User registered sucessfully", newUser });
       }
     } else {
-      res
+      return res
         .status(400)
-        .json({ errors: "Password and Confirm Password should be same" });
+        .json({ errors: ["Password and Confirm Password should be same"] });
     }
   } catch (err) {
     console.log(err);
-    res.status(400).json({ message: "Error occured during User Register" });
+    return res.status(500).json({ errors: ["Error occured during User Register"] });
   }
 };
 
