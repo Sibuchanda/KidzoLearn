@@ -20,7 +20,7 @@ function Login() {
       if (data.user) {
         localStorage.setItem('username', data.user.username);
         toast.success(data.message || "User login successful");
-        navigateTo("/demo");
+        navigateTo("/testing");
       } else {
         throw new Error("Token not found in response");
       }
