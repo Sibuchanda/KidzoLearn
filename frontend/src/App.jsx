@@ -42,7 +42,7 @@ function App() {
       element: <Login />,
     },
     {
-      path: "/dashboard",
+      path: "/demo",
       element: (
         <PrivateRoute>
           <Demo/>
