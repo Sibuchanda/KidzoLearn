@@ -19,7 +19,7 @@ function Login() {
       if (data.user) {
         localStorage.setItem('username', data.user.username);
         toast.success(data.message || "User login successful");
-        window.location.href = "/testing";
+        window.location.href = "/dashboard";
         navigateT
       } else {
         throw new Error("Token not found in response");

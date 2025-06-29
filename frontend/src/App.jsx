@@ -25,7 +25,6 @@ import PrivateRoute from "./authenticate/PrivateRoute";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Testing } from "./pages/dashboard/Testing";
 
 function App() {
   const router = createBrowserRouter([
@@ -42,10 +41,10 @@ function App() {
       element: <Login />,
     },
     {
-      path: "/testing",
+      path: "/dashboard",
       element: (
         <PrivateRoute>
-          <Testing/>
+          <Dashboard/>
         </PrivateRoute>
       ),
     },
