@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from "react-toastify";
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-    const navigateTo = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -20,7 +19,8 @@ function Login() {
       if (data.user) {
         localStorage.setItem('username', data.user.username);
         toast.success(data.message || "User login successful");
-        navigateTo("/testing");
+        window.location.href = "/testing";
+        navigateT
       } else {
         throw new Error("Token not found in response");
       }
