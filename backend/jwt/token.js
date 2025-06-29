@@ -10,8 +10,8 @@ const generateToken = async (userId, res) => {
     })
     res.cookie("jwt", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
+        secure: true,
+        sameSite: "None",
         path: "/"
     })
 
