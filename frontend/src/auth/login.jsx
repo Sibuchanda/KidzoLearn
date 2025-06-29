@@ -11,7 +11,7 @@ function Login() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        'http://localhost:8000/user/login',
+        'https://kidzoschool.onrender.com/user/login',
         { email, password },
         { withCredentials: true, headers: { 'Content-Type': 'application/json' } }
       );

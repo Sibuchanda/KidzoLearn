@@ -358,7 +358,7 @@ const LearnWords = () => {
     setShowPopup(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/task/play",
+        "https://kidzoschool.onrender.com/task/play",
         {
           activityName: "WordsRecognition",
           taskKey: char,

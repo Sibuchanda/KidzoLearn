@@ -14,7 +14,7 @@ function Signup() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/user/signup",
+        "https://kidzoschool.onrender.com/user/signup",
         {
           username,
           email,

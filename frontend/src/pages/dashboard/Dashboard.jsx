@@ -29,7 +29,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/user/profile", {
+      .get("https://kidzoschool.onrender.com/user/profile", {
         withCredentials: true,
       })
       .then((res) => {
@@ -66,7 +66,7 @@ export default function DashboardPage() {
     if (val) {
       try {
         await axios.post(
-          "http://localhost:8000/user/logout",
+          "https://kidzoschool.onrender.com/user/logout",
           {},
           {
             withCredentials: true,

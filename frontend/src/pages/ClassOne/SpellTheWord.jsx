@@ -79,7 +79,7 @@ const SpellTheWord = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/task/play",
+        "https://kidzoschool.onrender.com/task/play",
         {
           activityName: "WordCompletion",
           taskKey: correctWord,

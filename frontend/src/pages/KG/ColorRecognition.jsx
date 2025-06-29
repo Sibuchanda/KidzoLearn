@@ -27,7 +27,7 @@ export default function ColorRecognition() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/task/play",
+        "https://kidzoschool.onrender.com/task/play",
         {
           activityName: "ColorRecognition",
           taskKey: colorName,

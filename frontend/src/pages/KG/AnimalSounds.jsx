@@ -25,7 +25,7 @@ const AnimalSoundFlashcards = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/task/play",
+        "https://kidzoschool.onrender.com/task/play",
         {
           activityName: "AnimalRecognition",
           taskKey: animalName,

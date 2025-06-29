@@ -8,7 +8,7 @@ const PrivateRoute = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/user/profile", {
+        const res = await axios.get("https://kidzoschool.onrender.com/user/profile", {
           withCredentials: true,
         });
 

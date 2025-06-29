@@ -103,7 +103,7 @@ export default function BasicMath() {
     const currentMath = questions[currentIndex].question;
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/task/play",
+        "https://kidzoschool.onrender.com/task/play",
         {
           activityName: "MathPractice",
           taskKey: currentMath,

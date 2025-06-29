@@ -11,7 +11,7 @@ export default function Progress() {
     const fetchProgress = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:8000/task/progress",
+          "https://kidzoschool.onrender.com/task/progress",
           { withCredentials: true }
         );
         setUserProgress(data);

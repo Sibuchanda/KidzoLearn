@@ -46,7 +46,7 @@ export default function AlphabetObjectGame() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/task/play",
+        "https://kidzoschool.onrender.com/task/play",
         {
           activityName: "AlphabetRecognition",
           taskKey: letter,
