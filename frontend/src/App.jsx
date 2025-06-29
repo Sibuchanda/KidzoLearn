@@ -10,6 +10,8 @@ import NumberRecognition from "./pages/KG/NumberRecognition";
 import AlphabetRecognition from "./pages/KG/AlphabetRecognition";
 import AnimalSounds from "./pages/KG/AnimalSounds";
 
+import Demo from './pages/dashboard/demo'
+
 import ClassOneActivities from "./pages/ClassOne/ClassOneActivities";
 import LearnWords from "./pages/ClassOne/LearnWords";
 import SpellTheWord from "./pages/ClassOne/SpellTheWord";
@@ -43,7 +45,7 @@ function App() {
       path: "/dashboard",
       element: (
         <PrivateRoute>
-          <Dashboard />
+          <Demo/>
         </PrivateRoute>
       ),
     },
