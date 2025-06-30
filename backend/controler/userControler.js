@@ -68,7 +68,9 @@ export const signup = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ errors: ["Error occured during User Register"] });
+    return res
+      .status(500)
+      .json({ errors: ["Error occured during User Register"] });
   }
 };
 
@@ -96,8 +98,6 @@ export const login = async (req, res) => {
   }
 };
 
-
-
 // ================ Getting email from cookie token ==========
 export const getProfile = async (req, res) => {
   const token = req.cookies.jwt;
@@ -116,13 +116,12 @@ export const getProfile = async (req, res) => {
   }
 };
 
-
 // ================ Logout ===================
 export const logout = async (req, res) => {
   res.clearCookie("jwt", {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
+    secure: true,
+    sameSite: "None",
     path: "/",
   });
   res.status(200).json({ message: "Logged out successfully" });
