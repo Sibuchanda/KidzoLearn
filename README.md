@@ -2,6 +2,8 @@
 
 Welcome to **KidzoSchool**, an interactive learning app specially designed for **Kindergarten (KG) to Class 1** students. This guide will help you through the app step by step, from opening the homepage to exploring each learning activity.
 
+Live Link : https://kidzoschool-kuiu.onrender.com
+
 ---
 
 ## Key Features of Kidzolearn
