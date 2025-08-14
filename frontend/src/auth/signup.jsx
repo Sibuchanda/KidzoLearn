@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 function Signup() {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setconfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const navigateTo = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await axios.post(
         "http://localhost:8000/user/signup",
@@ -37,17 +40,21 @@ function Signup() {
     } catch (err) {
       console.log(err);
       const errorData = err?.response?.data?.errors;
-
       if (Array.isArray(errorData)) {
         errorData.forEach((msg) => toast.error(msg));
       } else {
         toast.error(errorData || "User registration failed!!");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cover bg-center px-2 sm:px-4 md:px-6" style={{ backgroundImage: 'url(/images/bg2.png)' }}>
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center px-2 sm:px-4 md:px-6"
+      style={{ backgroundImage: "url(/images/bg2.png)" }}
+    >
       <div className="w-full max-w-[95%] sm:max-w-sm md:max-w-md lg:max-w-lg bg-white rounded-lg shadow-lg p-4 sm:p-6 md:p-8">
         <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-5 text-blue-800">
           Signup
@@ -55,7 +62,9 @@ function Signup() {
         <form onSubmit={handleRegister}>
           {/* Username */}
           <div className="mb-3 sm:mb-4">
-            <label className="block mb-1 sm:mb-2 font-semibold text-sm sm:text-base">Username</label>
+            <label className="block mb-1 sm:mb-2 font-semibold text-sm sm:text-base">
+              Username
+            </label>
             <input
               className="w-full p-2 sm:p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
               type="text"
@@ -67,7 +76,9 @@ function Signup() {
 
           {/* Email */}
           <div className="mb-3 sm:mb-4">
-            <label className="block mb-1 sm:mb-2 font-semibold text-sm sm:text-base">Email</label>
+            <label className="block mb-1 sm:mb-2 font-semibold text-sm sm:text-base">
+              Email
+            </label>
             <input
               className="w-full p-2 sm:p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
               type="email"
@@ -79,7 +90,9 @@ function Signup() {
 
           {/* Password */}
           <div className="mb-3 sm:mb-4">
-            <label className="block mb-1 sm:mb-2 font-semibold text-sm sm:text-base">Password</label>
+            <label className="block mb-1 sm:mb-2 font-semibold text-sm sm:text-base">
+              Password
+            </label>
             <input
               className="w-full p-2 sm:p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
               type="password"
@@ -91,7 +104,9 @@ function Signup() {
 
           {/* Confirm Password */}
           <div className="mb-3 sm:mb-4">
-            <label className="block mb-1 sm:mb-2 font-semibold text-sm sm:text-base">Confirm Password</label>
+            <label className="block mb-1 sm:mb-2 font-semibold text-sm sm:text-base">
+              Confirm Password
+            </label>
             <input
               className="w-full p-2 sm:p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
               type="password"
@@ -103,14 +118,42 @@ function Signup() {
 
           <button
             type="submit"
-            className="w-full p-2 sm:p-3 bg-blue-600 text-white hover:bg-blue-900 duration-300 rounded-xl font-semibold text-sm sm:text-base cursor-pointer"
+            disabled={loading}
+            className={`w-full p-2 sm:p-3 rounded-xl font-semibold text-sm sm:text-base cursor-pointer 
+              ${
+                loading
+                  ? "bg-blue-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-900"
+              } text-white duration-300`}
           >
-            Signup
+            {loading ? (
+              <div className="flex items-center justify-center gap-2">
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v8H4z"
+                  ></path>
+                </svg>
+                Processing...
+              </div>
+            ) : (
+              "Signup"
+            )}
           </button>
 
           <p className="mt-3 sm:mt-4 text-center text-gray-600 text-sm">
             Already have an account?{" "}
-            <Link to="/login" className="text-blue-600 hover:underline cursor-pointer">
+            <Link
+              to="/login"
+              className="text-blue-600 hover:underline cursor-pointer"
+            >
               Login
             </Link>
           </p>

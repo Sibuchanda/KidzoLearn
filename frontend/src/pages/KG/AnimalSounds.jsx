@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaVolumeUp } from "react-icons/fa";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import axios from "axios";
 
 const animals = [

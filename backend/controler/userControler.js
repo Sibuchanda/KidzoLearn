@@ -34,7 +34,7 @@ export const signup = async (req, res) => {
     const confirmpassword = req.body.confirmpassword;
 
     if (!username || !email || !password) {
-      res.status(400).json({ errors: "All fields are required" });
+      return res.status(400).json({ errors: "All fields are required" });
     }
     if (password === confirmpassword) {
       // safe parsing the userSchema using 'Zod
@@ -57,12 +57,12 @@ export const signup = async (req, res) => {
       await newUser.save();
 
       if (newUser) {
-        res
+        return res
           .status(201)
           .json({ message: "User registered sucessfully", newUser });
       }
     } else {
-      res
+      return res
         .status(400)
         .json({ errors: "Password and Confirm Password should be same" });
     }

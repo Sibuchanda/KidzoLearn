@@ -1,5 +1,6 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import HomePage from "./pages/home/HomePage";
 import Signup from "./auth/signup";
 import Login from "./auth/login";
@@ -22,8 +23,6 @@ import Progress from "./pages/dashboard/Progress";
 
 import PrivateRoute from "./authenticate/PrivateRoute";
 
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const router = createBrowserRouter([
@@ -155,7 +154,7 @@ function App() {
 
   return (
     <div className="h-full">
-      <ToastContainer position="top-right" />
+      <Toaster position="top-center" reverseOrder={false}/>
       <RouterProvider router={router} />
     </div>
   );
