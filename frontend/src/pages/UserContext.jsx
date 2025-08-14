@@ -7,7 +7,7 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState({ userame: "", email: "" });
 
   useEffect(() => {
-    axios.get("http://localhost:8000/user/profile", { withCredentials: true })
+    axios.get("https://kidzoschool.onrender.com/user/profile", { withCredentials: true })
       .then(res => {
         setUser({
           username: res.data.username,
