@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
+import { useUser } from "../UserContext";
 
 const classIcons = {
   KG: "🧸",
@@ -17,29 +18,15 @@ const classIcons = {
 };
 
 export default function DashboardPage() {
-  const [userName, setUserName] = useState("User");
-  const [userEmail, setUserEmail] = useState("user@example.com");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const profileRef = useRef(null);
+  const { user } = useUser(); // Context API
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
 
-  useEffect(() => {
-    axios
-      .get("https://kidzoschool.onrender.com/user/profile", {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setUserEmail(res.data.email);
-        setUserName(res.data.username);
-      })
-      .catch((err) => {
-        console.error("Error fetching email:", err);
-      });
-  }, []);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -137,20 +124,20 @@ export default function DashboardPage() {
                 className="flex items-center gap-4 bg-blue-500 px-4 py-2 rounded-full backdrop-blur-md shadow text-white font-medium cursor-pointer"
                 onClick={toggleProfile}
               >
-                <span>{userName?.[0]?.toUpperCase() || "U"}</span>
+                <span>{user?.username?.[0]?.toUpperCase() || "U"}</span>
               </div>
 
               {isProfileOpen && (
                 <div className="absolute right-2 mt-2 min-w-[220px] max-w-[90vw] bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 text-sm break-words">
                   <div className="px-4 py-3 border-b border-gray-100">
                     <p className="text-lg font-semibold text-gray-800">
-                      Hello, {userName}
+                      Hello, {user?.username || "User"}
                     </p>
                   </div>
                   <div className="px-4 py-3 border-b border-gray-100">
                     <div className="flex items-center gap-2">
                       <FaUser className="text-gray-500 text-sm" />
-                      <p className="text-sm text-gray-600">{userEmail}</p>
+                      <p className="text-sm text-gray-600">{user?.email || "john@gmail.com"}</p>
                     </div>
                   </div>
                   <div className="px-4 py-2">
@@ -170,7 +157,7 @@ export default function DashboardPage() {
           {/* Welcome and class cards */}
           <div>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-2 text-pink-600 drop-shadow">
-              Welcome, {userName}
+              Welcome, {user?.username}
             </h1>
             <p className="text-sm sm:text-base md:text-lg mb-8 text-pink-700 font-medium">
               Choose your class and learn with fun!

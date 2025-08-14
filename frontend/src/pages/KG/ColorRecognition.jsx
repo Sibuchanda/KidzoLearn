@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
-
+import toast from "react-hot-toast";
 const colors = [
   { name: "Red", hex: "#EF4444" },
   { name: "Blue", hex: "#3B82F6" },

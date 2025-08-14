@@ -34,7 +34,7 @@ export const signup = async (req, res) => {
     const confirmpassword = req.body.confirmpassword;
 
     if (!username || !email || !password) {
-      return res.status(400).json({ errors: ["All fields are required"] });
+      return res.status(400).json({ errors: "All fields are required" });
     }
     if (password === confirmpassword) {
       // safe parsing the userSchema using 'Zod

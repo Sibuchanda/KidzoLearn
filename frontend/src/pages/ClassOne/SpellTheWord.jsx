@@ -1,8 +1,8 @@
 // SpellTheWord.jsx
 import React, { useState } from "react";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+
 import axios from "axios";
 
 const wordsData = [

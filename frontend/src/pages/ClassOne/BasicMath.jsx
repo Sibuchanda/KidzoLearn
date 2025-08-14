@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 const questions = [
   { question: "2 + 3 =", answer: "5", hintExplanation: "2 + 3 = 5" },
