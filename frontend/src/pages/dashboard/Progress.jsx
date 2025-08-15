@@ -1,30 +1,11 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+
 import { Award, CheckCircle, TrendingUp, Target, Star } from "lucide-react";
+import { useUser } from "../UserContext";
 
 export default function Progress() {
-  const [userProgress, setUserProgress] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const email = localStorage.getItem("email");
+  const { progress, loadingProgress } = useUser();
 
-  useEffect(() => {
-    const fetchProgress = async () => {
-      try {
-        const { data } = await axios.get(
-          "https://kidzoschool.onrender.com/task/progress",
-          { withCredentials: true }
-        );
-        setUserProgress(data);
-      } catch (err) {
-        console.error("Error fetching progress:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProgress();
-  }, [email]);
-
-  if (loading) {
+if (loadingProgress) {
     return (
       <div
         className="min-h-screen flex items-center justify-center bg-cover bg-center"
@@ -40,7 +21,7 @@ export default function Progress() {
     );
   }
 
-  if (!userProgress) {
+  if (!progress) {
     return (
       <div
         className="min-h-screen flex items-center justify-center bg-cover bg-center"
@@ -61,7 +42,10 @@ export default function Progress() {
     );
   }
 
-  const { username, points, activityProgress } = userProgress;
+  const username = progress?.username;
+  const points = progress?.points;
+  const activityProgress = progress?.activityProgress;
+
   const totalTasks = Object.values(activityProgress).reduce(
     (sum, tasks) => sum + tasks.length,
     0
