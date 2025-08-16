@@ -4,6 +4,7 @@ import { useUser } from "../UserContext";
 
 export default function Progress() {
   const { progress, loadingProgress } = useUser();
+  const { username, points, activityProgress } = progress;
 
 if (loadingProgress) {
     return (
@@ -20,31 +21,6 @@ if (loadingProgress) {
       </div>
     );
   }
-
-  if (!progress) {
-    return (
-      <div
-        className="min-h-screen flex items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: "url(/images/bg2.png)" }}
-      >
-        <div className="text-center bg-white p-6 sm:p-8 rounded-2xl shadow-lg mx-2">
-          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Target className="w-6 h-6 sm:w-8 sm:h-8 text-red-500" />
-          </div>
-          <h2 className="text-lg sm:text-xl font-semibold text-slate-800 mb-2">
-            Could not load progress
-          </h2>
-          <p className="text-slate-600 text-sm sm:text-base">
-            Please try refreshing the page or check your connection.
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  const username = progress?.username;
-  const points = progress?.points;
-  const activityProgress = progress?.activityProgress;
 
   const totalTasks = Object.values(activityProgress).reduce(
     (sum, tasks) => sum + tasks.length,

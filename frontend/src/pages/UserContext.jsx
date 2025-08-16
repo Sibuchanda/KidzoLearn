@@ -5,8 +5,14 @@ const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState({ username: "", email: "" });
-  const [progress, setProgress] = useState({ username: "", points: "", activityProgress: "" });
   const [loadingUser, setLoadingUser] = useState(true);
+  
+    // --- States for user progress ---
+  const [progress, setProgress] = useState({
+    username: "",
+    points: 0,
+    activityProgress: [],
+  });
   const [loadingProgress, setLoadingProgress] = useState(true);
 
   // -- Fetching user profile ---
@@ -41,9 +47,9 @@ export function UserProvider({ children }) {
           { withCredentials: true }
         );
         setProgress({
-          username: res.data.username,
-          points: res.data.points,
-          activityProgress: res.data.activityProgress,
+          username: data.username || "",
+          points: data.points || 0,
+          activityProgress: data.activityProgress || [],
         });
       } catch (err) {
         console.error("Error fetching progress:", err);
