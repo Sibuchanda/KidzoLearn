@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+const VITE_BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -17,7 +18,7 @@ function Signup() {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "https://kidzoschool.onrender.com/user/signup",
+        `${VITE_BACKEND_URI}/signup`,
         {
           username,
           email,

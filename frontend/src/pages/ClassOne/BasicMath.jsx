@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+const VITE_BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -103,7 +104,7 @@ export default function BasicMath() {
     const currentMath = questions[currentIndex].question;
     try {
       const { data } = await axios.post(
-        "https://kidzoschool.onrender.com/task/play",
+        `${VITE_BACKEND_URI}/task/play`,
         {
           activityName: "MathPractice",
           taskKey: currentMath,

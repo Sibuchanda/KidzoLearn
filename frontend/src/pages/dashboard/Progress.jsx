@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Award, CheckCircle, TrendingUp, Target, Star } from "lucide-react";
+const VITE_BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 
 export default function Progress() {
   const [userProgress, setUserProgress] = useState(null);
@@ -11,7 +12,7 @@ export default function Progress() {
     const fetchProgress = async () => {
       try {
         const { data } = await axios.get(
-          "https://kidzoschool.onrender.com/task/progress",
+          `${VITE_BACKEND_URI}/task/progress`,
           { withCredentials: true }
         );
         setUserProgress(data);

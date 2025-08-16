@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+const VITE_BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 import axios from "axios";
 
 const UserContext = createContext();
@@ -7,7 +8,7 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState({ userame: "", email: "" });
 
   useEffect(() => {
-    axios.get("http://localhost:8000/user/profile", { withCredentials: true })
+    axios.get(`${VITE_BACKEND_URI}/user/profile`, { withCredentials: true })
       .then(res => {
         setUser({
           username: res.data.username,

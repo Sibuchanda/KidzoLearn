@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaVolumeUp } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
+const VITE_BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 
 const numbers = Array.from({ length: 10 }, (_, i) => i);
 
@@ -17,7 +18,7 @@ export default function NumberBounce() {
 
     try {
       const { data } = await axios.post(
-        "https://kidzoschool.onrender.com/task/play",
+        `${VITE_BACKEND_URI}/task/play`,
         {
           activityName: "NumberRecognition",
           taskKey: number.toString(),

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+const VITE_BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from 'react-hot-toast';
@@ -13,7 +14,7 @@ function Login() {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/user/login",
+        `${VITE_BACKEND_URI}/user/login`,
         { email, password },
         {
           withCredentials: true,

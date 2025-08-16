@@ -5,6 +5,7 @@ import {
   FaUser,
   FaSignOutAlt,
 } from "react-icons/fa";
+const VITE_BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
@@ -53,7 +54,7 @@ export default function DashboardPage() {
     if (val) {
       try {
         await axios.post(
-          "https://kidzoschool.onrender.com/user/logout",
+          `${VITE_BACKEND_URI}/user/logout`,
           {},
           {
             withCredentials: true,

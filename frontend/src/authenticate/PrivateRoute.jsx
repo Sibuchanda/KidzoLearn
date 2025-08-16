@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+const VITE_BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,7 +9,7 @@ const PrivateRoute = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get("https://kidzoschool.onrender.com/user/profile", {
+        const res = await axios.get(`${VITE_BACKEND_URI}/user/profile`, {
           withCredentials: true,
         });
 

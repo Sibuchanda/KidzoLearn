@@ -1,5 +1,6 @@
 // LearnWords.jsx
 import React, { useState } from "react";
+const VITE_BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -358,7 +359,7 @@ const LearnWords = () => {
     setShowPopup(true);
     try {
       const { data } = await axios.post(
-        "https://kidzoschool.onrender.com/task/play",
+        `${VITE_BACKEND_URI}/task/play`,
         {
           activityName: "WordsRecognition",
           taskKey: char,

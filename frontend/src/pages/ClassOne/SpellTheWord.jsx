@@ -1,6 +1,7 @@
 // SpellTheWord.jsx
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+const VITE_BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
@@ -79,7 +80,7 @@ const SpellTheWord = () => {
 
     try {
       const { data } = await axios.post(
-        "https://kidzoschool.onrender.com/task/play",
+        `${VITE_BACKEND_URI}/task/play`,
         {
           activityName: "WordCompletion",
           taskKey: correctWord,

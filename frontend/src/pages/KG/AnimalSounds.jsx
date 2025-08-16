@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaVolumeUp } from "react-icons/fa";
 import toast from "react-hot-toast";
 import axios from "axios";
+const VITE_BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 
 const animals = [
   { name: "Cat", image: "cat.png", sound: "cat.wav" },
@@ -25,7 +26,7 @@ const AnimalSoundFlashcards = () => {
 
     try {
       const { data } = await axios.post(
-        "https://kidzoschool.onrender.com/task/play",
+        `${VITE_BACKEND_URI}/task/play`,
         {
           activityName: "AnimalRecognition",
           taskKey: animalName,

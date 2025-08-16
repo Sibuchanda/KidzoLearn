@@ -3,6 +3,7 @@ import { FaVolumeUp } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+const VITE_BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 
 const alphabetData = {
   A: { word: "Apple", emoji: "🍎" },
@@ -46,7 +47,7 @@ export default function AlphabetObjectGame() {
 
     try {
       const { data } = await axios.post(
-        "https://kidzoschool.onrender.com/task/play",
+        `${VITE_BACKEND_URI}/task/play`,
         {
           activityName: "AlphabetRecognition",
           taskKey: letter,

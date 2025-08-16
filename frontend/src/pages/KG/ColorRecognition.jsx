@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+const VITE_BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 const colors = [
   { name: "Red", hex: "#EF4444" },
   { name: "Blue", hex: "#3B82F6" },
@@ -26,7 +27,7 @@ export default function ColorRecognition() {
 
     try {
       const { data } = await axios.post(
-        "https://kidzoschool.onrender.com/task/play",
+        `${VITE_BACKEND_URI}/task/play`,
         {
           activityName: "ColorRecognition",
           taskKey: colorName,
