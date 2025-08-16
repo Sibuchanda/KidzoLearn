@@ -12,7 +12,8 @@ const generateToken = async (userId, res) => {
         httpOnly: true,
         secure: true,
         sameSite: "None",
-        path: "/"
+        path: "/",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     })
 
     // Here we store the token to the token field in the user schema model
