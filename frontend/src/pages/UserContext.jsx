@@ -38,7 +38,6 @@ export function UserProvider({ children }) {
   }, []);
 
   // ---------- Fetching user progress ------
-  useEffect(() => {
     const fetchProgress = async () => {
       setLoadingProgress(true);
       try {
@@ -58,8 +57,9 @@ export function UserProvider({ children }) {
       }
     };
 
+   useEffect(()=>{
     fetchProgress();
-  }, []);
+   },[])
 
   return (
     <UserContext.Provider
@@ -69,7 +69,8 @@ export function UserProvider({ children }) {
         loadingUser,
         progress,
         setProgress,
-        loadingProgress
+        loadingProgress,
+        fetchProgress
       }}
     >
       {children}

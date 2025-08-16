@@ -1,10 +1,15 @@
 
 import { Award, CheckCircle, TrendingUp, Target, Star } from "lucide-react";
 import { useUser } from "../UserContext";
+import { useEffect } from "react";
 
 export default function Progress() {
-  const { progress, loadingProgress } = useUser();
+  const { progress, loadingProgress, fetchProgress } = useUser();
   const { username, points, activityProgress } = progress;
+ 
+   useEffect(()=>{
+    fetchProgress();
+   },[]);
 
 if (loadingProgress) {
     return (
